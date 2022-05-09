@@ -52,7 +52,9 @@ const IndexProduct = () => {
 					<td className="px-[10px] py-[16px] text-left">{item.availability}</td>
 					<td className="px-[10px] py-[16px] text-left">{item.color}</td>
 					<td className="px-[10px] py-[16px] text-left">{item.size}</td>
-					<td className="px-[10px] py-[16px] text-left">{item.image}</td>
+					<td className="px-[10px] py-[16px]">
+						<img className="w-[80px]" src={`http://127.0.0.1:8000/assets/images/product/${item.image}`}/>
+					</td>
 					<td className="px-[10px] py-[16px] text-right">
 						<Link to={`/admin/product/${item.id}/edit`} className="px-[10px] text-blue-500 duration-[500ms] hover:text-blue-700">
 							<i className="fa-solid fa-pen-to-square"></i>
