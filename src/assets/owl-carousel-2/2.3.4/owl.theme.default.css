@@ -1,0 +1,57 @@
+.carousel-wrapper {
+	position: relative;
+}
+
+.owl-carousel .owl-nav {
+	overflow: hidden;
+	height: 10px;
+}
+
+.owl-theme .owl-dots .owl-dot.active span,
+.owl-theme .owl-dots .owl-dot:hover span {
+	background: #2267d8;
+}
+
+.owl-carousel .nav-button {
+	padding: 11px 15px;
+	border-radius: 9999px;
+	cursor: pointer;
+	position: absolute;
+	top: -50px !important;
+}
+
+.owl-carousel .owl-prev.disabled,
+.owl-carousel .owl-next.disabled {
+	pointer-events: none;
+	opacity: 0.25;
+}
+
+.owl-carousel .owl-prev {
+	right: 50px;
+}
+
+.owl-carousel .owl-next {
+	right: 0px;
+}
+
+.owl-theme .owl-nav [class*=owl-] {
+	color: #191919;
+	font-size: 16px;
+	background: #f7f8fa;
+	border-radius: 9999px;
+	line-height: 0px;
+	transition-duration: 500ms;
+}
+
+.owl-theme .owl-nav [class*=owl-]:hover {
+	color: #f7f8fa;
+	background: #2267d8;
+}
+
+.owl-carousel .prev-carousel:hover {
+	background-position: 0px -53px;
+}
+
+.owl-carousel .next-carousel:hover {
+	background-position: -24px -53px;
+}
