@@ -10,6 +10,9 @@ import EditSubCategory from './pages/admin/sub-category/EditSubCategory';
 import IndexProduct from './pages/admin/product/IndexProduct';
 import CreateProduct from './pages/admin/product/CreateProduct';
 import EditProduct from './pages/admin/product/EditProduct';
+import IndexNews from './pages/admin/news/IndexNews';
+import CreateNews from './pages/admin/news/CreateNews';
+import EditNews from './pages/admin/news/EditNews';
 
 function App() {
 	return (
@@ -25,6 +28,9 @@ function App() {
 				<Route path='/admin/product' element={<IndexProduct/>}/>
 				<Route path='/admin/product/create' element={<CreateProduct/>}/>
 				<Route path='/admin/product/:id/edit' element={<EditProduct/>}/>
+				<Route path='/admin/news' element={<IndexNews/>}/>
+				<Route path='/admin/news/create' element={<CreateNews/>}/>
+				<Route path='/admin/news/:id/edit' element={<EditNews/>}/>
 			</Routes>
 		</BrowserRouter>
 	);
