@@ -10,28 +10,28 @@ const PrimaryNavigation = () => {
 			</div>
 			<ul>
 				<li>
-					<NavLink to="/admin/category" className={({isActive}) => isActive ? "flex justify-beetween items-center cursor-pointer w-full p-[16px] text-[#15a362] font-[600] bg-[#edfdf6] border-l-[6px] border-[#15a362]" : "flex justify-beetween items-center cursor-pointer w-full p-[16px] pl-[22px] text-[#5d6778] duration-[500ms] hover:text-[#15a362]"}>
+					<NavLink to="/dashboard/category" className={({isActive}) => isActive ? "flex justify-beetween items-center cursor-pointer w-full p-[16px] text-[#15a362] font-[600] bg-[#edfdf6] border-l-[6px] border-[#15a362]" : "flex justify-beetween items-center cursor-pointer w-full p-[16px] pl-[22px] text-[#5d6778] duration-[500ms] hover:text-[#15a362]"}>
 						<div className="basis-[94%]">
 							<i className="fa-solid fa-folder mr-[10px] text-[14px]"></i><span>Categories</span>
 						</div>
 					</NavLink>
 				</li>
 				<li>
-					<NavLink to="/admin/sub-category" className={({isActive}) => isActive ? "flex justify-beetween items-center cursor-pointer w-full p-[16px] text-[#15a362] font-[600] bg-[#edfdf6] border-l-[6px] border-[#15a362]" : "flex justify-beetween items-center cursor-pointer w-full p-[16px] pl-[22px] text-[#5d6778] duration-[500ms] hover:text-[#15a362]"} id="categoryLevel1">
+					<NavLink to="/dashboard/sub-category" className={({isActive}) => isActive ? "flex justify-beetween items-center cursor-pointer w-full p-[16px] text-[#15a362] font-[600] bg-[#edfdf6] border-l-[6px] border-[#15a362]" : "flex justify-beetween items-center cursor-pointer w-full p-[16px] pl-[22px] text-[#5d6778] duration-[500ms] hover:text-[#15a362]"} id="categoryLevel1">
 						<div className="basis-[94%]">
 							<i className="fa-solid fa-folder-open mr-[10px] text-[14px]"></i><span>Sub-categories</span>
 						</div>
 					</NavLink>
 				</li>
 				<li>
-					<NavLink to="/admin/product" className={({isActive}) => isActive ? "flex justify-beetween items-center cursor-pointer w-full p-[16px] text-[#15a362] font-[600] bg-[#edfdf6] border-l-[6px] border-[#15a362]" : "flex justify-beetween items-center cursor-pointer w-full p-[16px] pl-[22px] text-[#5d6778] duration-[500ms] hover:text-[#15a362]"} id="categoryLevel1">
+					<NavLink to="/dashboard/product" className={({isActive}) => isActive ? "flex justify-beetween items-center cursor-pointer w-full p-[16px] text-[#15a362] font-[600] bg-[#edfdf6] border-l-[6px] border-[#15a362]" : "flex justify-beetween items-center cursor-pointer w-full p-[16px] pl-[22px] text-[#5d6778] duration-[500ms] hover:text-[#15a362]"} id="categoryLevel1">
 						<div className="basis-[94%]">
 							<i className="fa-solid fa-shirt mr-[10px] text-[14px]"></i><span>Products</span>
 						</div>
 					</NavLink>
 				</li>
 				<li>
-					<NavLink to="/admin/news" className={({isActive}) => isActive ? "flex justify-beetween items-center cursor-pointer w-full p-[16px] text-[#15a362] font-[600] bg-[#edfdf6] border-l-[6px] border-[#15a362]" : "flex justify-beetween items-center cursor-pointer w-full p-[16px] pl-[22px] text-[#5d6778] duration-[500ms] hover:text-[#15a362]"} id="categoryLevel1">
+					<NavLink to="/dashboard/news" className={({isActive}) => isActive ? "flex justify-beetween items-center cursor-pointer w-full p-[16px] text-[#15a362] font-[600] bg-[#edfdf6] border-l-[6px] border-[#15a362]" : "flex justify-beetween items-center cursor-pointer w-full p-[16px] pl-[22px] text-[#5d6778] duration-[500ms] hover:text-[#15a362]"} id="categoryLevel1">
 						<div className="basis-[94%]">
 							<i className="fa-solid fa-file-lines mr-[10px] text-[14px]"></i><span>News</span>
 						</div>

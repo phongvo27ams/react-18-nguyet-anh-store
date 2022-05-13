@@ -43,10 +43,10 @@ const IndexNews = () => {
 		newsTable = news.map((item) => {
 			return (
 				<tr className="border-t" key={item.id}>
-					<td className="px-[10px] py-[16px] text-left">Title</td>
-					<td className="px-[10px] py-[16px] text-left">Author</td>
-					<td className="px-[10px] py-[16px] text-left">Brief</td>
-					<td className="px-[10px] py-[16px] text-left">Image</td>
+					<td className="px-[10px] py-[16px] text-left">{item.title}</td>
+					<td className="px-[10px] py-[16px] text-left">{item.user.name}</td>
+					<td className="px-[10px] py-[16px] text-left">{item.brief}</td>
+					<td className="px-[10px] py-[16px] text-left">{item.image}</td>
 					<td className="px-[10px] py-[16px] text-right">
 						<Link to={`/admin/news/${item.id}/edit`} className="px-[10px] text-blue-500 duration-[500ms] hover:text-blue-700">
 							<i className="fa-solid fa-pen-to-square"></i>

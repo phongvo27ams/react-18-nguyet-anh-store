@@ -3,10 +3,6 @@ import {Link} from 'react-router-dom';
 import axios from 'axios';
 import swal from 'sweetalert';
 
-import Header from '../../../components/admin/Header';
-import PrimaryNavigation from '../../../components/admin/PrimaryNavigation';
-import MobileNavigation from '../../../components/admin/MobileNavigation';
-
 const IndexSubCategory = () => {
 	const [subCategories, setSubCategories] = useState([]);
 	const [loading, setLoading] = useState(true);
@@ -45,7 +41,7 @@ const IndexSubCategory = () => {
 					<td className="px-[10px] py-[16px]">{item.name}</td>
 					<td className="px-[10px] py-[16px]">{item.category.name}</td>
 					<td className="px-[10px] py-[16px] text-right">
-						<Link to={`/admin/sub-category/${item.id}/edit`} className="px-[10px] text-blue-500 duration-[500ms] hover:text-blue-700">
+						<Link to={`/dashboard/sub-category/${item.id}/edit`} className="px-[10px] text-blue-500 duration-[500ms] hover:text-blue-700">
 							<i className="fa-solid fa-pen-to-square"></i>
 						</Link>
 						{/* Call the destroy function with event and id */}
@@ -59,40 +55,29 @@ const IndexSubCategory = () => {
 	}
 
 	return (
-		<div className="container mx-auto">
-			<div className="grid grid-cols-[40%_60%] lg:grid-cols-[24%_76%] xl:grid-cols-[20%_80%]">
-				<PrimaryNavigation/>
-				<MobileNavigation/>
-
-				<section className="col-span-2 lg:col-span-1 grid-rows-2">
-					<Header/>
-
-					<section className="relative min-h-screen p-[36px] bg-[#f5f6fe]">
-						<div className="mb-[16px]">
-							<span className="text-[24px] font-[600] mr-[8px]">Sub-categories</span>
-							<Link to="/admin/sub-category/create" className="text-[20px] text-[#5d6778] duration-[500ms] hover:text-[#15a362]">
-								<i className="fa-solid fa-circle-plus"></i>
-							</Link>
-						</div>
-						
-						<div className="flex overflow-auto">
-							<table className="table-auto basis-[100%] min-w-[500px] bg-white rounded shadow-md">
-								<thead>
-									<tr>
-										<th className="px-[10px] py-[16px] text-left w-[60%]">Name</th>
-										<th className="px-[10px] py-[16px] text-left w-[20%]">Category</th>
-										<th className="px-[10px] py-[16px] text-right w-[20%]" rowSpan="2">Options</th>
-									</tr>
-								</thead>
-								<tbody>
-									{subCategoryTable}
-								</tbody>
-							</table>
-						</div>
-					</section>
-				</section>
+		<section className="relative min-h-screen p-[36px] bg-[#f5f6fe]">
+			<div className="mb-[16px]">
+				<span className="text-[24px] font-[600] mr-[8px]">Sub-categories</span>
+				<Link to="/dashboard/sub-category/create" className="text-[20px] text-[#5d6778] duration-[500ms] hover:text-[#15a362]">
+					<i className="fa-solid fa-circle-plus"></i>
+				</Link>
 			</div>
-		</div>
+			
+			<div className="flex overflow-auto">
+				<table className="table-auto basis-[100%] min-w-[500px] bg-white rounded shadow-md">
+					<thead>
+						<tr>
+							<th className="px-[10px] py-[16px] text-left w-[60%]">Name</th>
+							<th className="px-[10px] py-[16px] text-left w-[20%]">Category</th>
+							<th className="px-[10px] py-[16px] text-right w-[20%]" rowSpan="2">Options</th>
+						</tr>
+					</thead>
+					<tbody>
+						{subCategoryTable}
+					</tbody>
+				</table>
+			</div>
+		</section>
 	);
 }
 

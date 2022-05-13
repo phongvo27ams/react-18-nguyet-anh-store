@@ -52,6 +52,7 @@ const Product = () => {
 
 	const update = async(event) => {
 		event.preventDefault();
+		
 		const formData = new FormData();
 		formData.append('name', productInput.name);
 		formData.append('sub_category_id', productInput.sub_category_id);
