@@ -1,5 +1,5 @@
 import React from 'react';
-import {Routes, Route, Outlet} from 'react-router-dom';
+import {Outlet} from 'react-router-dom';
 
 import Header from '../components/admin/Header';
 import PrimaryNavigation from '../components/admin/PrimaryNavigation';

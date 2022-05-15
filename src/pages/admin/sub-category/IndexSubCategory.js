@@ -41,7 +41,7 @@ const IndexSubCategory = () => {
 					<td className="px-[10px] py-[16px]">{item.name}</td>
 					<td className="px-[10px] py-[16px]">{item.category.name}</td>
 					<td className="px-[10px] py-[16px] text-right">
-						<Link to={`/dashboard/sub-category/${item.id}/edit`} className="px-[10px] text-blue-500 duration-[500ms] hover:text-blue-700">
+						<Link to={`/admin/sub-category/${item.id}/edit`} className="px-[10px] text-blue-500 duration-[500ms] hover:text-blue-700">
 							<i className="fa-solid fa-pen-to-square"></i>
 						</Link>
 						{/* Call the destroy function with event and id */}
@@ -58,7 +58,7 @@ const IndexSubCategory = () => {
 		<section className="relative min-h-screen p-[36px] bg-[#f5f6fe]">
 			<div className="mb-[16px]">
 				<span className="text-[24px] font-[600] mr-[8px]">Sub-categories</span>
-				<Link to="/dashboard/sub-category/create" className="text-[20px] text-[#5d6778] duration-[500ms] hover:text-[#15a362]">
+				<Link to="/admin/sub-category/create" className="text-[20px] text-[#5d6778] duration-[500ms] hover:text-[#15a362]">
 					<i className="fa-solid fa-circle-plus"></i>
 				</Link>
 			</div>

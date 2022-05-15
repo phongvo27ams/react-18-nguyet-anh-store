@@ -69,7 +69,7 @@ const EditSubCategory = () => {
 			<section className="w-[100%] bg-white p-[20px] rounded-md shadow-md">
 				<div className="flex justify-between items-center mb-[10px]">
 					<p className="uppercase text-[20px] font-[600]">Edit</p>
-					<Link to="/dashboard/sub-category" className="text-[20px] p-[10px] duration-[500ms] hover:text-red-500" id="closeCreateModal">
+					<Link to="/admin/sub-category" className="text-[20px] p-[10px] duration-[500ms] hover:text-red-500" id="closeCreateModal">
 						<i className="fa-solid fa-xmark"></i>
 					</Link>
 				</div>

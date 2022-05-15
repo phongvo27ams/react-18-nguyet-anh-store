@@ -55,7 +55,7 @@ const CreateCategory = () => {
 				<div className="flex justify-between items-center mb-[10px]">
 					<p className="uppercase text-[20px] font-[600]">Create</p>
 					{/* Close Button */}
-					<Link to="/dashboard/category">
+					<Link to="/admin/category">
 						<button className="text-[20px] p-[10px] duration-[500ms] hover:text-red-500">
 							<i className="fa-solid fa-xmark"></i>
 						</button>

@@ -48,7 +48,7 @@ const IndexCategory = () => {
 						<img src={`http://127.0.0.1:8000/assets/images/category/${item.image}`}/>
 					</td>
 					<td className="px-[10px] py-[16px] text-right">
-						<Link to={`/dashboard/category/${item.id}/edit`} className="px-[10px] text-blue-500 duration-[500ms] hover:text-blue-700">
+						<Link to={`/admin/category/${item.id}/edit`} className="px-[10px] text-blue-500 duration-[500ms] hover:text-blue-700">
 							<i className="fa-solid fa-pen-to-square"></i>
 						</Link>
 						{/* Call the destroy function with event and id */}
@@ -66,7 +66,7 @@ const IndexCategory = () => {
 			<div className="mb-[16px]">
 				<span className="text-[24px] font-[600] mr-[8px]">Categories</span>
 				{/* Close Button */}
-				<Link to="/dashboard/category/create">
+				<Link to="/admin/category/create">
 					<button className="text-[20px] text-[#5d6778] duration-[500ms] hover:text-[#15a362]">
 						<i className="fa-solid fa-circle-plus"></i>
 					</button>
