@@ -3,6 +3,12 @@ import {Link} from 'react-router-dom';
 import axios from 'axios';
 import swal from 'sweetalert';
 
+import Header from '../../../components/admin/Header';
+import PrimaryNavigation from '../../../components/admin/PrimaryNavigation';
+import MobileNavigation from '../../../components/admin/MobileNavigation';
+
+import '../../../assets/css/pages/admin/category/IndexCategory.css';
+
 const IndexCategory = () => {
 	// Set the state
 	const [categories, setCategories] = useState([]);
@@ -62,32 +68,41 @@ const IndexCategory = () => {
 	}
 
 	return (
-		<section className="relative min-h-screen p-[36px] bg-[#f5f6fe]">
-			<div className="mb-[16px]">
-				<span className="text-[24px] font-[600] mr-[8px]">Categories</span>
-				{/* Close Button */}
-				<Link to="/admin/category/create">
-					<button className="text-[20px] text-[#5d6778] duration-[500ms] hover:text-[#15a362]">
-						<i className="fa-solid fa-circle-plus"></i>
-					</button>
-				</Link>
-				{/* ------------ */}
-			</div>
-			
-			<div className="flex overflow-auto">
-				<table className="table-auto basis-[100%] min-w-[500px] bg-white rounded shadow-md">
-					<thead>
-						<tr>
-							<th className="px-[10px] py-[16px] text-left w-[60%]">Name</th>
-							<th className="px-[10px] py-[16px] text-left w-[20%]">Image</th>
-							<th className="px-[10px] py-[16px] text-right w-[20%]" rowSpan="2">Options</th>
-						</tr>
-					</thead>
-					<tbody>
-						{categoriesTable}
-					</tbody>
-				</table>
-			</div>
+		<section className="main-container">
+				<PrimaryNavigation/>
+				<MobileNavigation/>
+
+				<section className="col-span-2 lg:col-span-1 grid-rows-2">
+					<Header/>
+					
+					<section className="relative min-h-screen p-[36px] bg-[#f5f6fe]">
+						<div className="mb-[16px]">
+							<span className="text-[24px] font-[600] mr-[8px]">Categories</span>
+							{/* Close Button */}
+							<Link to="/admin/category/create">
+								<button className="text-[20px] text-[#5d6778] duration-[500ms] hover:text-[#15a362]">
+									<i className="fa-solid fa-circle-plus"></i>
+								</button>
+							</Link>
+							{/* ------------ */}
+						</div>
+						
+						<div className="flex overflow-auto">
+							<table className="table-auto basis-[100%] min-w-[500px] bg-white rounded shadow-md">
+								<thead>
+									<tr>
+										<th className="px-[10px] py-[16px] text-left w-[60%]">Name</th>
+										<th className="px-[10px] py-[16px] text-left w-[20%]">Image</th>
+										<th className="px-[10px] py-[16px] text-right w-[20%]" rowSpan="2">Options</th>
+									</tr>
+								</thead>
+								<tbody>
+									{categoriesTable}
+								</tbody>
+							</table>
+						</div>
+					</section>
+				</section>
 		</section>
 	);
 }

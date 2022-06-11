@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 import '../../assets/css/main.css';
 import '../../assets/font-awesome-6/6.1.1/css/all.min.css';
 import '../../assets/js/admin/dashboard';
+import '../../assets/css/components/admin/Header.css';
 
 const Header = () => {
 	return (

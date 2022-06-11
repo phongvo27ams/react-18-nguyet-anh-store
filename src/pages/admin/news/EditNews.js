@@ -3,6 +3,10 @@ import {Link, useParams, useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import swal from 'sweetalert';
 
+import Header from '../../../components/admin/Header';
+import PrimaryNavigation from '../../../components/admin/PrimaryNavigation';
+import MobileNavigation from '../../../components/admin/MobileNavigation';
+
 const EditNews = () => {
 	const [newsInput, setNews] = useState({
 		title: '',
@@ -96,24 +100,35 @@ const EditNews = () => {
 	}
 
 	return (
-		<section className="relative min-h-screen p-[36px] bg-[#f5f6fe]">
-			<div className="mb-[16px]">
-				<span className="text-[24px] font-[600] mr-[8px]">News</span>
+		<div className="container mx-auto">
+			<div className="grid grid-cols-[40%_60%] lg:grid-cols-[24%_76%] xl:grid-cols-[20%_80%]">
+				<PrimaryNavigation/>
+				<MobileNavigation/>
+
+				<section className="col-span-2 lg:col-span-1 grid-rows-2">
+					<Header/>
+					
+					<section className="relative min-h-screen p-[36px] bg-[#f5f6fe]">
+						<div className="mb-[16px]">
+							<span className="text-[24px] font-[600] mr-[8px]">News</span>
+						</div>
+							
+						<section className="w-[100%] bg-white p-[20px] rounded-md shadow-md">
+							<div className="flex justify-between items-center mb-[10px]">
+								<p className="uppercase text-[20px] font-[600]">Edit</p>
+								{/* Close Button */}
+								<Link to="/admin/news">
+									<button className="text-[20px] p-[10px] duration-[500ms] hover:text-red-500">
+										<i className="fa-solid fa-xmark"></i>
+									</button>
+								</Link>
+							</div>
+							{editForm}
+						</section>
+					</section>
+				</section>
 			</div>
-				
-			<section className="w-[100%] bg-white p-[20px] rounded-md shadow-md">
-				<div className="flex justify-between items-center mb-[10px]">
-					<p className="uppercase text-[20px] font-[600]">Edit</p>
-					{/* Close Button */}
-					<Link to="/admin/news">
-						<button className="text-[20px] p-[10px] duration-[500ms] hover:text-red-500">
-							<i className="fa-solid fa-xmark"></i>
-						</button>
-					</Link>
-				</div>
-				{editForm}
-			</section>
-		</section>
+		</div>
 	);
 }
 

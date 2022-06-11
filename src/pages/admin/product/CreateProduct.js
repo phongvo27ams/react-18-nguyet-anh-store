@@ -3,6 +3,10 @@ import {Link} from 'react-router-dom';
 import axios from 'axios';
 import swal from 'sweetalert';
 
+import Header from '../../../components/admin/Header';
+import PrimaryNavigation from '../../../components/admin/PrimaryNavigation';
+import MobileNavigation from '../../../components/admin/MobileNavigation';
+
 const CreateProduct = () => {
 	const [subCategories, setSubCategories] = useState([]);
 	const [productInput, setProduct] = useState({
@@ -81,104 +85,115 @@ const CreateProduct = () => {
 	}, []);
 
 	return(
-		<section className="relative min-h-screen p-[36px] bg-[#f5f6fe]">
-			<div className="mb-[16px]">
-				<span className="text-[24px] font-[600] mr-[8px]">Products</span>
+		<div className="container mx-auto">
+			<div className="grid grid-cols-[40%_60%] lg:grid-cols-[24%_76%] xl:grid-cols-[20%_80%]">
+				<PrimaryNavigation/>
+				<MobileNavigation/>
+
+				<section className="col-span-2 lg:col-span-1 grid-rows-2">
+					<Header/>
+					
+					<section className="relative min-h-screen p-[36px] bg-[#f5f6fe]">
+						<div className="mb-[16px]">
+							<span className="text-[24px] font-[600] mr-[8px]">Products</span>
+						</div>
+							
+						<section className="w-[100%] bg-white p-[20px] rounded-md shadow-md">
+							<div className="flex justify-between items-center mb-[10px]">
+								<p className="uppercase text-[20px] font-[600]">Create</p>
+								{/* Close Button */}
+								<Link to="/admin/product">
+									<button className="text-[20px] p-[10px] duration-[500ms] hover:text-red-500">
+										<i className="fa-solid fa-xmark"></i>
+									</button>
+								</Link>
+							</div>
+							
+							<form className="flex flex-wrap gap-[10px]" encType="multipart/form-data" onSubmit={store}>
+								<label className="group relative basis-[60%]">
+									<span className="absolute top-[12px] left-[10px] text-[#5d6778] bg-white duration-[500ms]">Name</span>
+									<input type="text" className="w-[100%] p-[12px] mb-[12px] rounded border outline-none duration-[100ms] focus:border-[#15a362]" name="name" value={productInput.name} onChange={handleInput}/>
+									<p className="text-red-600 text-[12px]">{errors.name}</p>
+								</label>
+
+								<label className="group relative basis-[36%]">
+									<select className="w-[100%] p-[12px] mb-[12px] rounded border outline-none duration-[100ms] focus:border-[#15a362]" name="sub_category_id" value={productInput.sub_category_id} onChange={handleInput}>
+										<option value="">Select a sub-category...</option>
+										{subCategories.map((item) => {
+											return (
+												<option key={item.id} value={item.id}>{item.name}</option>
+											)
+										})}
+									</select>
+									<p className="text-red-600 text-[12px]">{errors.sub_category_id}</p>
+								</label>
+
+								<label className="group relative basis-[30%]">
+									<span className="absolute top-[12px] left-[10px] text-[#5d6778] bg-white duration-[500ms]">Unit Price</span>
+									<input type="number" className="w-[100%] p-[12px] mb-[12px] rounded border outline-none duration-[100ms] focus:border-[#15a362]" name="unit_price" value={productInput.unit_price} onChange={handleInput}/>
+									<p className="text-red-600 text-[12px]">{errors.unit_price}</p>
+								</label>
+
+								<label className="group relative basis-[30%]">
+									<span className="absolute top-[12px] left-[10px] text-[#5d6778] bg-white duration-[500ms]">Sale Price</span>
+									<input type="number" className="w-[100%] p-[12px] mb-[12px] rounded border outline-none duration-[100ms] focus:border-[#15a362]" name="sale_price" value={productInput.sale_price} onChange={handleInput}/>
+									<p className="text-red-600 text-[12px]">{errors.sale_price}</p>
+								</label>
+
+								<label className="group relative basis-[30%]">
+									<span className="absolute top-[12px] left-[10px] text-[#5d6778] bg-white duration-[500ms]">Rate</span>
+									<input type="number" min="1" max="5" className="w-[100%] p-[12px] mb-[12px] rounded border outline-none duration-[100ms] focus:border-[#15a362]" name="rate" value={productInput.rate} onChange={handleInput}/>
+									<p className="text-red-600 text-[12px]">{errors.rate}</p>
+								</label>
+
+								<label className="group relative basis-[30%]">
+									<span className="absolute top-[12px] left-[10px] text-[#5d6778] bg-white duration-[500ms]">Vendor</span>
+									<input type="text" className="w-[100%] p-[12px] mb-[12px] rounded border outline-none duration-[100ms] focus:border-[#15a362]" name="vendor" value={productInput.vendor} onChange={handleInput}/>
+									<p className="text-red-600 text-[12px]">{errors.vendor}</p>
+								</label>
+
+								<label className="group relative basis-[30%]">
+									<span className="absolute top-[12px] left-[10px] text-[#5d6778] bg-white duration-[500ms]">SKU</span>
+									<input type="text" className="w-[100%] p-[12px] mb-[12px] rounded border outline-none duration-[100ms] focus:border-[#15a362]" name="sku" value={productInput.sku} onChange={handleInput}/>
+									<p className="text-red-600 text-[12px]">{errors.sku}</p>
+								</label>
+
+								<label className="group relative basis-[30%]">
+									<select className="w-[100%] p-[12px] mb-[12px] rounded border outline-none duration-[100ms] focus:border-[#15a362]" name="availability" onChange={handleInput}>
+										<option value="">Select availability...</option>
+										<option value="In stock">In stock</option>
+										<option value="Out of stock">Out of stock</option>
+									</select>
+									<p className="text-red-600 text-[12px]">{errors.availability}</p>
+								</label>
+
+								<label className="group relative basis-[100%]">
+									<textarea type="text" className="w-[100%] p-[12px] mb-[12px] rounded border outline-none duration-[100ms] focus:border-[#15a362]" name="description" value={productInput.description} onChange={handleInput} placeholder="Description..."></textarea>
+									<p className="text-red-600 text-[12px]">{errors.description}</p>
+								</label>
+
+								<label className="group relative basis-[45%]">
+									<span className="absolute top-[12px] left-[10px] text-[#5d6778] bg-white duration-[500ms]">Color</span>
+									<input type="text" className="w-[100%] p-[12px] mb-[12px] rounded border outline-none duration-[100ms] focus:border-[#15a362]" name="color" value={productInput.color} onChange={handleInput}/>
+									<p className="text-red-600 text-[12px]">{errors.color}</p>
+								</label>
+
+								<label className="group relative basis-[45%]">
+									<span className="absolute top-[12px] left-[10px] text-[#5d6778] bg-white duration-[500ms]">Size</span>
+									<input type="text" className="w-[100%] p-[12px] mb-[12px] rounded border outline-none duration-[100ms] focus:border-[#15a362]" name="size" value={productInput.size} onChange={handleInput}/>
+									<p className="text-red-600 text-[12px]">{errors.size}</p>
+								</label>
+
+								<input type="file" className="w-[100%] py-[12px] mb-[6px] rounded outline-none duration-[100ms] focus:border-[#15a362]" name="image" onChange={handleImage}/>
+								<p className="w-[100%] text-red-600 text-[12px]">{errors.image}</p>
+
+								<button type="submit" className="basis-fit uppercase font-[600] py-[12px] px-[24px] border-[#15a362] rounded border cursor-pointer duration-[500ms] hover:text-white hover:bg-[#15a362]">Create</button>
+							</form>
+						</section>
+					</section>
+				</section>
 			</div>
-				
-			<section className="w-[100%] bg-white p-[20px] rounded-md shadow-md">
-				<div className="flex justify-between items-center mb-[10px]">
-					<p className="uppercase text-[20px] font-[600]">Create</p>
-					{/* Close Button */}
-					<Link to="/admin/product">
-						<button className="text-[20px] p-[10px] duration-[500ms] hover:text-red-500">
-							<i className="fa-solid fa-xmark"></i>
-						</button>
-					</Link>
-				</div>
-				
-				<form className="flex flex-wrap gap-[10px]" encType="multipart/form-data" onSubmit={store}>
-					<label className="group relative basis-[60%]">
-						<span className="absolute top-[12px] left-[10px] text-[#5d6778] bg-white duration-[500ms]">Name</span>
-						<input type="text" className="w-[100%] p-[12px] mb-[12px] rounded border outline-none duration-[100ms] focus:border-[#15a362]" name="name" value={productInput.name} onChange={handleInput}/>
-						<p className="text-red-600 text-[12px]">{errors.name}</p>
-					</label>
-
-					<label className="group relative basis-[36%]">
-						<select className="w-[100%] p-[12px] mb-[12px] rounded border outline-none duration-[100ms] focus:border-[#15a362]" name="sub_category_id" value={productInput.sub_category_id} onChange={handleInput}>
-							<option value="">Select a sub-category...</option>
-							{subCategories.map((item) => {
-								return (
-									<option key={item.id} value={item.id}>{item.name}</option>
-								)
-							})}
-						</select>
-						<p className="text-red-600 text-[12px]">{errors.sub_category_id}</p>
-					</label>
-
-					<label className="group relative basis-[30%]">
-						<span className="absolute top-[12px] left-[10px] text-[#5d6778] bg-white duration-[500ms]">Unit Price</span>
-						<input type="number" className="w-[100%] p-[12px] mb-[12px] rounded border outline-none duration-[100ms] focus:border-[#15a362]" name="unit_price" value={productInput.unit_price} onChange={handleInput}/>
-						<p className="text-red-600 text-[12px]">{errors.unit_price}</p>
-					</label>
-
-					<label className="group relative basis-[30%]">
-						<span className="absolute top-[12px] left-[10px] text-[#5d6778] bg-white duration-[500ms]">Sale Price</span>
-						<input type="number" className="w-[100%] p-[12px] mb-[12px] rounded border outline-none duration-[100ms] focus:border-[#15a362]" name="sale_price" value={productInput.sale_price} onChange={handleInput}/>
-						<p className="text-red-600 text-[12px]">{errors.sale_price}</p>
-					</label>
-
-					<label className="group relative basis-[30%]">
-						<span className="absolute top-[12px] left-[10px] text-[#5d6778] bg-white duration-[500ms]">Rate</span>
-						<input type="number" min="1" max="5" className="w-[100%] p-[12px] mb-[12px] rounded border outline-none duration-[100ms] focus:border-[#15a362]" name="rate" value={productInput.rate} onChange={handleInput}/>
-						<p className="text-red-600 text-[12px]">{errors.rate}</p>
-					</label>
-
-					<label className="group relative basis-[30%]">
-						<span className="absolute top-[12px] left-[10px] text-[#5d6778] bg-white duration-[500ms]">Vendor</span>
-						<input type="text" className="w-[100%] p-[12px] mb-[12px] rounded border outline-none duration-[100ms] focus:border-[#15a362]" name="vendor" value={productInput.vendor} onChange={handleInput}/>
-						<p className="text-red-600 text-[12px]">{errors.vendor}</p>
-					</label>
-
-					<label className="group relative basis-[30%]">
-						<span className="absolute top-[12px] left-[10px] text-[#5d6778] bg-white duration-[500ms]">SKU</span>
-						<input type="text" className="w-[100%] p-[12px] mb-[12px] rounded border outline-none duration-[100ms] focus:border-[#15a362]" name="sku" value={productInput.sku} onChange={handleInput}/>
-						<p className="text-red-600 text-[12px]">{errors.sku}</p>
-					</label>
-
-					<label className="group relative basis-[30%]">
-						<select className="w-[100%] p-[12px] mb-[12px] rounded border outline-none duration-[100ms] focus:border-[#15a362]" name="availability" onChange={handleInput}>
-							<option value="">Select availability...</option>
-							<option value="In stock">In stock</option>
-							<option value="Out of stock">Out of stock</option>
-						</select>
-						<p className="text-red-600 text-[12px]">{errors.availability}</p>
-					</label>
-
-					<label className="group relative basis-[100%]">
-						<textarea type="text" className="w-[100%] p-[12px] mb-[12px] rounded border outline-none duration-[100ms] focus:border-[#15a362]" name="description" value={productInput.description} onChange={handleInput} placeholder="Description..."></textarea>
-						<p className="text-red-600 text-[12px]">{errors.description}</p>
-					</label>
-
-					<label className="group relative basis-[45%]">
-						<span className="absolute top-[12px] left-[10px] text-[#5d6778] bg-white duration-[500ms]">Color</span>
-						<input type="text" className="w-[100%] p-[12px] mb-[12px] rounded border outline-none duration-[100ms] focus:border-[#15a362]" name="color" value={productInput.color} onChange={handleInput}/>
-						<p className="text-red-600 text-[12px]">{errors.color}</p>
-					</label>
-
-					<label className="group relative basis-[45%]">
-						<span className="absolute top-[12px] left-[10px] text-[#5d6778] bg-white duration-[500ms]">Size</span>
-						<input type="text" className="w-[100%] p-[12px] mb-[12px] rounded border outline-none duration-[100ms] focus:border-[#15a362]" name="size" value={productInput.size} onChange={handleInput}/>
-						<p className="text-red-600 text-[12px]">{errors.size}</p>
-					</label>
-
-					<input type="file" className="w-[100%] py-[12px] mb-[6px] rounded outline-none duration-[100ms] focus:border-[#15a362]" name="image" onChange={handleImage}/>
-					<p className="w-[100%] text-red-600 text-[12px]">{errors.image}</p>
-
-					<button type="submit" className="basis-fit uppercase font-[600] py-[12px] px-[24px] border-[#15a362] rounded border cursor-pointer duration-[500ms] hover:text-white hover:bg-[#15a362]">Create</button>
-				</form>
-			</section>
-		</section>
+		</div>
 	)
 }
 

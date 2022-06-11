@@ -4,7 +4,12 @@ import OwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
 
+import Header from '../../components/guest/Header';
 import PrimaryNavigation from '../../components/guest/PrimaryNavigation';
+import StickyNavigation from '../../components/guest/StickyNavigation';
+import MobileNavigation from '../../components/guest/MobileNavigation';
+import BackToTop from '../../components/guest/BackToTop';
+import Footer from '../../components/guest/Footer';
 
 const Index = () => {
 	const settings = {
@@ -41,6 +46,11 @@ const Index = () => {
 
 	return (
 		<>
+			<Header/>
+			<StickyNavigation/>
+			<MobileNavigation/>
+			<BackToTop/>
+
 			<section className="container mx-auto">
 				<div className="grid grid-cols-1 lg:grid-cols-[14.25rem_45.188rem] xl:grid-cols-[17.5rem_55rem] gap-[1.25rem] mx-auto max-w-[61.875rem] xl:max-w-[75rem] px-[0.625rem] mb-[3.75rem]">
 					<PrimaryNavigation/>
@@ -145,9 +155,9 @@ const Index = () => {
 												<p className="text-sm font-bold pb-[0.15rem]">Tailored Fit Mesh-Panel Polo</p>
 												<span className="text-red-500 text-[1rem] mr-2">$399.00</span>
 												<span className="line-through text-[1rem]">$449.00</span>
-												<a href="" className="flex items-center w-[9.019rem] mt-[0.625rem] text-sm p-2 rounded-md border border-blue-500 duration-500 text-blue-500 hover:text-white hover:bg-blue-500">
+												<span href="" className="flex items-center w-[9.019rem] mt-[0.625rem] text-sm p-2 rounded-md border border-blue-500 duration-500 text-blue-500 hover:text-white hover:bg-blue-500">
 													<i className="fa-solid fa-cart-plus text-[1rem] mr-[0.5rem]"></i><span className="uppercase">Add to cart</span>
-												</a>
+												</span>
 											</div>
 										</div>
 									</div>
@@ -183,9 +193,9 @@ const Index = () => {
 												<p className="text-sm font-bold pb-[0.15rem]">Tailored Fit Mesh-Panel Polo</p>
 												<span className="text-red-500 text-[1rem] mr-2">$399.00</span>
 												<span className="line-through text-[1rem]">$449.00</span>
-												<a href="" className="flex items-center w-[9.019rem] mt-[0.625rem] text-sm p-2 rounded-md border border-blue-500 duration-500 text-blue-500 hover:text-white hover:bg-blue-500">
+												<span href="" className="flex items-center w-[9.019rem] mt-[0.625rem] text-sm p-2 rounded-md border border-blue-500 duration-500 text-blue-500 hover:text-white hover:bg-blue-500">
 													<i className="fa-solid fa-cart-plus text-[1rem] mr-[0.5rem]"></i><span className="uppercase">Add to cart</span>
-												</a>
+												</span>
 											</div>
 										</div>
 									</div>
@@ -221,9 +231,9 @@ const Index = () => {
 												<p className="text-sm font-bold pb-[0.15rem]">Tailored Fit Mesh-Panel Polo</p>
 												<span className="text-red-500 text-[1rem] mr-2">$399.00</span>
 												<span className="line-through text-[1rem]">$449.00</span>
-												<a href="" className="flex items-center w-[9.019rem] mt-[0.625rem] text-sm p-2 rounded-md border border-blue-500 duration-500 text-blue-500 hover:text-white hover:bg-blue-500">
+												<span href="" className="flex items-center w-[9.019rem] mt-[0.625rem] text-sm p-2 rounded-md border border-blue-500 duration-500 text-blue-500 hover:text-white hover:bg-blue-500">
 													<i className="fa-solid fa-cart-plus text-[1rem] mr-[0.5rem]"></i><span className="uppercase">Add to cart</span>
-												</a>
+												</span>
 											</div>
 										</div>
 									</div>
@@ -259,9 +269,9 @@ const Index = () => {
 												<p className="text-sm font-bold pb-[0.15rem]">Tailored Fit Mesh-Panel Polo</p>
 												<span className="text-red-500 text-[1rem] mr-2">$399.00</span>
 												<span className="line-through text-[1rem]">$449.00</span>
-												<a href="" className="flex items-center w-[9.019rem] mt-[0.625rem] text-sm p-2 rounded-md border border-blue-500 duration-500 text-blue-500 hover:text-white hover:bg-blue-500">
+												<span href="" className="flex items-center w-[9.019rem] mt-[0.625rem] text-sm p-2 rounded-md border border-blue-500 duration-500 text-blue-500 hover:text-white hover:bg-blue-500">
 													<i className="fa-solid fa-cart-plus text-[1rem] mr-[0.5rem]"></i><span className="uppercase">Add to cart</span>
-												</a>
+												</span>
 											</div>
 										</div>
 									</div>
@@ -297,9 +307,9 @@ const Index = () => {
 												<p className="text-sm font-bold pb-[0.15rem]">Tailored Fit Mesh-Panel Polo</p>
 												<span className="text-red-500 text-[1rem] mr-2">$399.00</span>
 												<span className="line-through text-[1rem]">$449.00</span>
-												<a href="" className="flex items-center w-[9.019rem] mt-[0.625rem] text-sm p-2 rounded-md border border-blue-500 duration-500 text-blue-500 hover:text-white hover:bg-blue-500">
+												<span href="" className="flex items-center w-[9.019rem] mt-[0.625rem] text-sm p-2 rounded-md border border-blue-500 duration-500 text-blue-500 hover:text-white hover:bg-blue-500">
 													<i className="fa-solid fa-cart-plus text-[1rem] mr-[0.5rem]"></i><span className="uppercase">Add to cart</span>
-												</a>
+												</span>
 											</div>
 										</div>
 									</div>
@@ -356,6 +366,8 @@ const Index = () => {
 					</div>
 				</div>
 			</section>
+
+			<Footer/>
 		</>
 	);
 }
