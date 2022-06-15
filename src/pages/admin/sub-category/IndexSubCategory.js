@@ -4,8 +4,7 @@ import axios from 'axios';
 import swal from 'sweetalert';
 
 import Header from '../../../components/admin/Header';
-import PrimaryNavigation from '../../../components/admin/PrimaryNavigation';
-import MobileNavigation from '../../../components/admin/MobileNavigation';
+import Navigation from '../../../components/admin/Navigation';
 
 const IndexSubCategory = () => {
 	const [subCategories, setSubCategories] = useState([]);
@@ -61,12 +60,9 @@ const IndexSubCategory = () => {
 	return (
 		<div className="container mx-auto">
 			<div className="grid grid-cols-[40%_60%] lg:grid-cols-[24%_76%] xl:grid-cols-[20%_80%]">
-				<PrimaryNavigation/>
-				<MobileNavigation/>
-
+				<Navigation/>
 				<section className="col-span-2 lg:col-span-1 grid-rows-2">
 					<Header/>
-					
 					<section className="relative min-h-screen p-[36px] bg-[#f5f6fe]">
 						<div className="mb-[16px]">
 							<span className="text-[24px] font-[600] mr-[8px]">Sub-categories</span>

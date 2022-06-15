@@ -3,6 +3,9 @@
 	/* -------------------- Admin -------------------- */
 	--dark-green-color: #15a362;
 	--grey-text-color: #5d6778;
+	--light-red-color: rgb(239, 68, 68);
+	--dark-red-color: rgb(220, 38, 38);
 	--light-green-background-color: #edfdf6;
 	--light-grey-background-color: #f5f6fe;
+	--shadow-medium: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
 }
