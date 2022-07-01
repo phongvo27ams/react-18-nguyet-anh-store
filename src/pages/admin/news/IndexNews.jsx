@@ -116,25 +116,23 @@ const TableDataLoader = styled.td`
 `;
 
 // ========== React Function Component ========== //
-const IndexCategory = () => {
-	// Set the state
-	const [categories, setCategories] = useState([]);
+const IndexNews = () => {
+	const [news, setNews] = useState([]);
 	const [loading, setLoading] = useState(true);
 
 	const index = async() => {
-		const response = await axios.get(`http://127.0.0.1:8000/api/admin/category`);
+		const response = await axios.get(`http://127.0.0.1:8000/api/admin/news`);
 		if(response.data.status === 200) {
-			setCategories(response.data.categories);
+			setNews(response.data.news);
 			setLoading(false);
 		}
 	}
 
 	const destroy = async(event, id) => {
-		// Deleting process message
 		const deleting = event.currentTarget;
-		deleting.innerText = 'Deleting...';
+		deleting.innerText = 'Deleting';
 
-		const response = await axios.delete(`http://127.0.0.1:8000/api/admin/sub-category/${id}`);
+		const response = await axios.delete(`http://127.0.0.1:8000/api/admin/news/${id}`);
 		if(response.data.status === 200) {
 			// Sweet Alert
 			swal('Success', response.data.message);
@@ -142,33 +140,31 @@ const IndexCategory = () => {
 		}
 	}
 
-	// Show the list of categories
 	useEffect(() => {
 		index();
 	}, []);
 
-	let categoriesTable = '';
+	let newsTable = '';
 	if(loading) {
-		// While getting data from server, display the Loader
-		categoriesTable = 
+		newsTable =
 			<TableRow>
-				<TableDataLoader colSpan="3"><Loader/></TableDataLoader>
+				<TableDataLoader colSpan="5"><Loader/></TableDataLoader>
 			</TableRow>
 	} else {
-		// When finish loading, loop through categories as item
-		categoriesTable = categories.map((item) => {
+		newsTable = news.map((item) => {
 			return (
 				<TableRow key={item.id}>
-					<TableData>{item.name}</TableData>
+					<TableData>{item.title}</TableData>
+					<TableData>{item.user.name}</TableData>
+					<TableData>{item.brief}</TableData>
 					<TableData>
-						<TableDataImage src={`http://127.0.0.1:8000/assets/images/category/${item.image}`} atl="category"/>
+						<TableDataImage src={`http://127.0.0.1:8000/assets/images/news/${item.image}`} atl="news"/>
 					</TableData>
 					<TableData>
-						<LinkEdit to={`/admin/category/${item.id}/edit`}>
+						<LinkEdit to={`/admin/news/${item.id}/edit`}>
 							<i className="fa-solid fa-pen-to-square"></i>
 						</LinkEdit>
-						
-						{/* Call the destroy function with event and id */}
+
 						<LinkDestroy onClick={(event) => destroy(event, item.id)}>
 							<i className="fa-solid fa-trash-can"></i>
 						</LinkDestroy>
@@ -187,9 +183,9 @@ const IndexCategory = () => {
 
 				<Content>
 					<ContentTitle>
-						Categories
+						News
 
-						<LinkCreate to="/admin/category/create">
+						<LinkCreate to="/admin/news/create">
 							<i className="fa-solid fa-circle-plus"></i>
 						</LinkCreate>
 					</ContentTitle>
@@ -198,14 +194,16 @@ const IndexCategory = () => {
 						<Table>
 							<thead>
 								<tr>
-									<TableHeader>Name</TableHeader>
+									<TableHeader>Title</TableHeader>
+									<TableHeader>Author</TableHeader>
+									<TableHeader>Brief</TableHeader>
 									<TableHeader>Image</TableHeader>
 									<TableHeader rowSpan="2">Options</TableHeader>
 								</tr>
 							</thead>
 
 							<tbody>
-								{categoriesTable}
+								{newsTable}
 							</tbody>
 						</Table>
 					</TableContainer>
@@ -215,4 +213,4 @@ const IndexCategory = () => {
 	);
 }
 
-export default IndexCategory;
+export default IndexNews;

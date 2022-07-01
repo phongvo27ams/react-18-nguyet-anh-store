@@ -89,10 +89,6 @@ const TableData = styled.td`
 	}
 `;
 
-const TableDataImage = styled.img`
-	width: 200px;
-`;
-
 const LinkEdit = styled(Link)`
 	padding: 0 10px;
 	color: rgb(59 130 246);
@@ -116,23 +112,21 @@ const TableDataLoader = styled.td`
 `;
 
 // ========== React Function Component ========== //
-const IndexCategory = () => {
-	// Set the state
-	const [categories, setCategories] = useState([]);
+const IndexSubCategory = () => {
+	const [subCategories, setSubCategories] = useState([]);
 	const [loading, setLoading] = useState(true);
 
 	const index = async() => {
-		const response = await axios.get(`http://127.0.0.1:8000/api/admin/category`);
+		const response = await axios.get(`http://127.0.0.1:8000/api/admin/sub-category`);
 		if(response.data.status === 200) {
-			setCategories(response.data.categories);
+			setSubCategories(response.data.subCategories);
 			setLoading(false);
 		}
 	}
 
 	const destroy = async(event, id) => {
-		// Deleting process message
 		const deleting = event.currentTarget;
-		deleting.innerText = 'Deleting...';
+		deleting.innerHTML = 'Deleting...';
 
 		const response = await axios.delete(`http://127.0.0.1:8000/api/admin/sub-category/${id}`);
 		if(response.data.status === 200) {
@@ -142,29 +136,24 @@ const IndexCategory = () => {
 		}
 	}
 
-	// Show the list of categories
 	useEffect(() => {
 		index();
 	}, []);
 
-	let categoriesTable = '';
+	let subCategoryTable = '';
 	if(loading) {
-		// While getting data from server, display the Loader
-		categoriesTable = 
+		subCategoryTable =
 			<TableRow>
 				<TableDataLoader colSpan="3"><Loader/></TableDataLoader>
 			</TableRow>
 	} else {
-		// When finish loading, loop through categories as item
-		categoriesTable = categories.map((item) => {
+		subCategoryTable = subCategories.map((item) => {
 			return (
 				<TableRow key={item.id}>
 					<TableData>{item.name}</TableData>
+					<TableData>{item.category.name}</TableData>
 					<TableData>
-						<TableDataImage src={`http://127.0.0.1:8000/assets/images/category/${item.image}`} atl="category"/>
-					</TableData>
-					<TableData>
-						<LinkEdit to={`/admin/category/${item.id}/edit`}>
+						<LinkEdit to={`/admin/sub-category/${item.id}/edit`}>
 							<i className="fa-solid fa-pen-to-square"></i>
 						</LinkEdit>
 						
@@ -175,7 +164,7 @@ const IndexCategory = () => {
 					</TableData>
 				</TableRow>
 			);
-		});
+		})
 	}
 
 	return (
@@ -187,9 +176,9 @@ const IndexCategory = () => {
 
 				<Content>
 					<ContentTitle>
-						Categories
+						Sub-categories
 
-						<LinkCreate to="/admin/category/create">
+						<LinkCreate to="/admin/sub-category/create">
 							<i className="fa-solid fa-circle-plus"></i>
 						</LinkCreate>
 					</ContentTitle>
@@ -199,13 +188,13 @@ const IndexCategory = () => {
 							<thead>
 								<tr>
 									<TableHeader>Name</TableHeader>
-									<TableHeader>Image</TableHeader>
+									<TableHeader>Category</TableHeader>
 									<TableHeader rowSpan="2">Options</TableHeader>
 								</tr>
 							</thead>
 
 							<tbody>
-								{categoriesTable}
+								{subCategoryTable}
 							</tbody>
 						</Table>
 					</TableContainer>
@@ -215,4 +204,4 @@ const IndexCategory = () => {
 	);
 }
 
-export default IndexCategory;
+export default IndexSubCategory;

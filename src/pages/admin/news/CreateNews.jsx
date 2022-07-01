@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
@@ -116,6 +116,39 @@ const RegularInput = styled.input`
 	}
 `;
 
+const Textarea = styled.textarea`
+	position: relative;
+	z-index: 1;
+	background-color: transparent;
+	width: 100%;
+	padding: 12px;
+	border-width: 1px;
+	border-radius: 6px;
+	outline: none;
+	transition: 300ms ease-in-out;
+	&:focus {
+		border: 2px solid var(--dark-green-color);
+	}
+	&:focus ~ .regular-label {
+		z-index: 1;
+		color: var(--dark-green-color);
+		top: -8px;
+		padding: 0 2px;
+		font-size: 12px;
+		font-weight: bold;
+		background-color: white;
+	}
+	&:not(:placeholder-shown).regular-input:not(:focus) ~ .regular-label {
+		z-index: 1;
+		color: var(--dark-green-color);
+		top: -8px;
+		padding: 0 2px;
+		font-size: 12px;
+		font-weight: bold;
+		background-color: white;
+	}
+`;
+
 const RegularLabel = styled.label`
 	position: absolute;
 	top: 14px;
@@ -159,44 +192,47 @@ const SubmitButton = styled.button`
 `;
 
 // ========== React Function Component ========== //
-const CreateCategory = () => {
-	// Define the initial value
-	const [categoryInput, setCategory] = useState({
-		name: ''
+const CreateNews = () => {
+	const [newsInput, setNews] = useState({
+		title: '',
+		brief: '',
+		content: '',
+		image: '',
 	});
 	const [image, setImage] = useState('');
 	const [errors, setErrors] = useState([]);
 
-	// When the inputs change
 	const handleInput = (event) => {
 		event.persist();
-		setCategory({...categoryInput, [event.target.name]: event.target.value});
+		setNews({...newsInput, [event.target.name]: event.target.value});
 	}
-	// When the image change
+
 	const handleImage = (event) => {
 		setImage({image: event.target.files[0]});
 	}
 
-	// Store the category
 	const store = async(event) => {
 		event.preventDefault();
-		// Append name and image (Line 17-19) to data
+
 		const formData = new FormData();
-		formData.append('name', categoryInput.name);
+		formData.append('title', newsInput.title);
+		formData.append('brief', newsInput.brief);
+		formData.append('content', newsInput.content);
 		formData.append('image', image.image);
 
-		const response = await axios.post(`http://127.0.0.1:8000/api/admin/category`, formData);
+		const response = await axios.post(`http://127.0.0.1:8000/api/admin/news`, formData);
 		if(response.data.status === 200) {
-			// Sweet Alert
-			swal('Success', response.data.message);
-			// Clear the input
-			setCategory({...categoryInput,
-				name: ''
+			setNews({...newsInput,
+				title: '',
+				brief: '',
+				content: ''
 			});
-			// Clear errors
+			setImage({
+				image: ''
+			});
+			swal('Success', response.data.message);
 			setErrors([]);
 		} else {
-			// Show the errors
 			setErrors(response.data.errors);
 		}
 	}
@@ -209,23 +245,34 @@ const CreateCategory = () => {
 				<Header/>
 
 				<Content>
-					<ContentTitle>Categories</ContentTitle>
-					
+					<ContentTitle>News</ContentTitle>
+						
 					<ContentBody>
 						<ContentHeader>
 							<ContentHeaderTitle>Create</ContentHeaderTitle>
 
-							<LinkClose to="/admin/category">
+							<LinkClose to="/admin/news">
 								<i className="fa-solid fa-xmark"></i>
 							</LinkClose>
 						</ContentHeader>
 
 						<Form encType="multipart/form-data" onSubmit={store}>
 							<InputContainer regular>
-								{/* When the input changed, set the name as current typed value (event.target.value) */}
-								<RegularInput type="text" className="regular-input" name="name" value={categoryInput.name} onChange={handleInput} placeholder=" "/>
-								<RegularLabel className="regular-label">Name</RegularLabel>
-								<InputError>{errors.name}</InputError>
+								<RegularInput type="text" className="regular-input" name="title" value={newsInput.title} onChange={handleInput} placeholder=" "/>
+								<RegularLabel className="regular-label">Title</RegularLabel>
+								<InputError>{errors.title}</InputError>
+							</InputContainer>
+
+							<InputContainer regular>
+								<Textarea className="regular-input" name="brief" value={newsInput.brief} onChange={handleInput} placeholder=" "></Textarea>
+								<RegularLabel className="regular-label">Brief</RegularLabel>
+								<InputError>{errors.brief}</InputError>
+							</InputContainer>
+
+							<InputContainer regular>
+								<Textarea className="regular-input" name="content" value={newsInput.content} onChange={handleInput} placeholder=" "></Textarea>
+								<RegularLabel className="regular-label">Content</RegularLabel>
+								<InputError>{errors.content}</InputError>
 							</InputContainer>
 
 							<InputContainer>
@@ -233,7 +280,7 @@ const CreateCategory = () => {
 								<InputError>{errors.image}</InputError>
 							</InputContainer>
 
-							<SubmitButton type="submit">Store</SubmitButton>
+							<SubmitButton type="submit">Create</SubmitButton>
 						</Form>
 					</ContentBody>
 				</Content>
@@ -242,4 +289,4 @@ const CreateCategory = () => {
 	);
 }
 
-export default CreateCategory;
+export default CreateNews;

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
@@ -125,15 +125,16 @@ const RegularLabel = styled.label`
 	transition: 200ms ease-in-out;
 `;
 
-const FileInput = styled.input`
+const Select = styled.select`
 	width: 100%;
 	padding: 12px;
-	border-width: 1px;
+	margin-bottom: 6px;
 	border-radius: 6px;
-	cursor: pointer;
-	transition: 200ms ease-in-out;
+	border-width: 1px;
+	outline: none;
+	transition: 300ms ease-in-out;
 	&:hover {
-		box-shadow: var(--shadow-medium);
+		border-color: var(--dark-green-color);
 	}
 `;
 
@@ -159,38 +160,40 @@ const SubmitButton = styled.button`
 `;
 
 // ========== React Function Component ========== //
-const CreateCategory = () => {
-	// Define the initial value
-	const [categoryInput, setCategory] = useState({
-		name: ''
+const CreateSubCategory = () => {
+	// Use to display category options in select
+	const [categories, setCategories] = useState([]);
+	// Use to handle input
+	const [subCategoryInput, setSubCategory] = useState({
+		name: '',
+		category_id: ''
 	});
-	const [image, setImage] = useState('');
 	const [errors, setErrors] = useState([]);
 
-	// When the inputs change
 	const handleInput = (event) => {
 		event.persist();
-		setCategory({...categoryInput, [event.target.name]: event.target.value});
-	}
-	// When the image change
-	const handleImage = (event) => {
-		setImage({image: event.target.files[0]});
+		setSubCategory({...subCategoryInput, [event.target.name]: event.target.value});
 	}
 
-	// Store the category
+	const create = async() => {
+		const response = await axios.get(`http://127.0.0.1:8000/api/admin/sub-category/create`);
+		if(response.status === 200) {
+			setCategories(response.data.categories);
+		}
+	}
+
 	const store = async(event) => {
 		event.preventDefault();
-		// Append name and image (Line 17-19) to data
 		const formData = new FormData();
-		formData.append('name', categoryInput.name);
-		formData.append('image', image.image);
+		formData.append('name', subCategoryInput.name);
+		formData.append('category_id', subCategoryInput.category_id);
 
-		const response = await axios.post(`http://127.0.0.1:8000/api/admin/category`, formData);
+		const response = await axios.post(`http://127.0.0.1:8000/api/admin/sub-category`, formData);
 		if(response.data.status === 200) {
 			// Sweet Alert
 			swal('Success', response.data.message);
 			// Clear the input
-			setCategory({...categoryInput,
+			setSubCategory({...subCategoryInput,
 				name: ''
 			});
 			// Clear errors
@@ -201,6 +204,10 @@ const CreateCategory = () => {
 		}
 	}
 
+	useEffect(() => {
+		create()
+	}, []);
+
 	return (
 		<Main>
 			<Navigation/>
@@ -209,13 +216,13 @@ const CreateCategory = () => {
 				<Header/>
 
 				<Content>
-					<ContentTitle>Categories</ContentTitle>
-					
+					<ContentTitle>Sub-categories</ContentTitle>
+
 					<ContentBody>
 						<ContentHeader>
 							<ContentHeaderTitle>Create</ContentHeaderTitle>
 
-							<LinkClose to="/admin/category">
+							<LinkClose to="/admin/sub-category">
 								<i className="fa-solid fa-xmark"></i>
 							</LinkClose>
 						</ContentHeader>
@@ -223,14 +230,21 @@ const CreateCategory = () => {
 						<Form encType="multipart/form-data" onSubmit={store}>
 							<InputContainer regular>
 								{/* When the input changed, set the name as current typed value (event.target.value) */}
-								<RegularInput type="text" className="regular-input" name="name" value={categoryInput.name} onChange={handleInput} placeholder=" "/>
+								<RegularInput type="text" className="regular-input" name="name" value={subCategoryInput.name} onChange={handleInput} placeholder=" "/>
 								<RegularLabel className="regular-label">Name</RegularLabel>
 								<InputError>{errors.name}</InputError>
 							</InputContainer>
 
 							<InputContainer>
-								<FileInput type="file" name="image" onChange={handleImage}/>
-								<InputError>{errors.image}</InputError>
+								<Select name="category_id" value={subCategoryInput.category_id} onChange={handleInput}>
+									<option value="">Select a category...</option>
+									{categories.map((item) => {
+										return (
+											<option value={item.id} key={item.id}>{item.name}</option>
+										)
+									})}
+								</Select>
+								<InputError>{errors.category_id}</InputError>
 							</InputContainer>
 
 							<SubmitButton type="submit">Store</SubmitButton>
@@ -242,4 +256,4 @@ const CreateCategory = () => {
 	);
 }
 
-export default CreateCategory;
+export default CreateSubCategory;

@@ -1,11 +1,12 @@
-import React, {useState} from 'react';
-import {Link} from 'react-router-dom';
+import React, {useState, useEffect} from 'react';
+import {Link, useParams, useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
 import swal from 'sweetalert';
 
 import Header from '../../../components/admin/Header';
 import Navigation from '../../../components/admin/Navigation';
+import Loader from '../../../components/admin/Loader';
 
 // ========== Styled Components ========== //
 const Main = styled.main`
@@ -159,13 +160,18 @@ const SubmitButton = styled.button`
 `;
 
 // ========== React Function Component ========== //
-const CreateCategory = () => {
-	// Define the initial value
+const EditCategory = () => {
+	// Set the initial value
 	const [categoryInput, setCategory] = useState({
 		name: ''
 	});
-	const [image, setImage] = useState('');
+	const [image, setImage] = useState([]);
 	const [errors, setErrors] = useState([]);
+	const [loading, setLoading] = useState(true);
+
+	// Get the id from URL
+	const {id} = useParams();
+	const navigate = useNavigate();
 
 	// When the inputs change
 	const handleInput = (event) => {
@@ -177,28 +183,78 @@ const CreateCategory = () => {
 		setImage({image: event.target.files[0]});
 	}
 
-	// Store the category
-	const store = async(event) => {
-		event.preventDefault();
-		// Append name and image (Line 17-19) to data
-		const formData = new FormData();
-		formData.append('name', categoryInput.name);
-		formData.append('image', image.image);
+	// Get the category
+	const edit = async() => {
+		const response = await axios.get(`http://127.0.0.1:8000/api/admin/category/${id}/edit`);
+		if(response.data.status === 200) {
+			setCategory(response.data.category);
+			setImage(response.data.category.image);
+			setLoading(false);
+		} else if(response.data.status === 404) {
+			// If the id is not found
+			// Sweet Alert
+			swal('Warning', response.data.message);
+			// Return to category index page
+			navigate('/admin/category');
+		}
+	}
 
-		const response = await axios.post(`http://127.0.0.1:8000/api/admin/category`, formData);
+	// Update the category
+	const update = async(event) => {
+		event.preventDefault();
+
+		// Append name and image (Line 17-19) to data
+		const data = new FormData();
+		data.append('name', categoryInput.name);
+		data.append('image', image.image);
+
+		document.getElementById('updateButton').disabled = true;
+		document.getElementById('updateButton').innerText = 'Updating...';
+
+		const response = await axios.post(`http://127.0.0.1:8000/api/admin/category/${id}`, data);
 		if(response.data.status === 200) {
 			// Sweet Alert
 			swal('Success', response.data.message);
-			// Clear the input
-			setCategory({...categoryInput,
-				name: ''
-			});
-			// Clear errors
-			setErrors([]);
+			document.getElementById('updateButton').disabled = false;
+			document.getElementById('updateButton').innerText = 'Update';
+			// Return to category page
+			navigate('/admin/category');
 		} else {
+			document.getElementById('updateButton').disabled = false;
+			document.getElementById('updateButton').innerText = 'Update';
 			// Show the errors
 			setErrors(response.data.errors);
 		}
+	}
+
+	// Show the detail of category
+	useEffect(() => {
+		edit();
+	}, []);
+
+	let editForm = '';
+	if(loading) {
+		// While getting data from server, display Loading...
+		editForm = <Loader/>
+	} else {
+		// When finish loading, loop through categories as item
+		editForm =
+			<Form encType="multipart/form-data" onSubmit={update}>
+				<InputContainer regular>
+					<RegularInput type="text" className="regular-input" name="name" value={categoryInput.name} onChange={handleInput} placeholder=" "/>
+					<RegularLabel className="regular-label">Name</RegularLabel>
+					<InputError>{errors.name}</InputError>
+				</InputContainer>
+
+				<img src={`http://127.0.0.1:8000/assets/images/category/${image}`} alt="category"/>
+
+				<InputContainer>
+					<FileInput type="file" name="image" onChange={handleImage}/>
+					<InputError>{errors.image}</InputError>
+				</InputContainer>
+
+				<SubmitButton type="submit" id="updateButton">Update</SubmitButton>
+			</Form>
 	}
 
 	return (
@@ -210,31 +266,17 @@ const CreateCategory = () => {
 
 				<Content>
 					<ContentTitle>Categories</ContentTitle>
-					
+
 					<ContentBody>
 						<ContentHeader>
-							<ContentHeaderTitle>Create</ContentHeaderTitle>
+							<ContentHeaderTitle>Edit</ContentHeaderTitle>
 
 							<LinkClose to="/admin/category">
 								<i className="fa-solid fa-xmark"></i>
 							</LinkClose>
 						</ContentHeader>
 
-						<Form encType="multipart/form-data" onSubmit={store}>
-							<InputContainer regular>
-								{/* When the input changed, set the name as current typed value (event.target.value) */}
-								<RegularInput type="text" className="regular-input" name="name" value={categoryInput.name} onChange={handleInput} placeholder=" "/>
-								<RegularLabel className="regular-label">Name</RegularLabel>
-								<InputError>{errors.name}</InputError>
-							</InputContainer>
-
-							<InputContainer>
-								<FileInput type="file" name="image" onChange={handleImage}/>
-								<InputError>{errors.image}</InputError>
-							</InputContainer>
-
-							<SubmitButton type="submit">Store</SubmitButton>
-						</Form>
+						{editForm}
 					</ContentBody>
 				</Content>
 			</Section>
@@ -242,4 +284,4 @@ const CreateCategory = () => {
 	);
 }
 
-export default CreateCategory;
+export default EditCategory;

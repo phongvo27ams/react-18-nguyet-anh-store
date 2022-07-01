@@ -1,11 +1,12 @@
-import React, {useState} from 'react';
-import {Link} from 'react-router-dom';
+import React, {useState, useEffect} from 'react';
+import {Link, useParams, useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import styled from 'styled-components';
 import swal from 'sweetalert';
 
 import Header from '../../../components/admin/Header';
 import Navigation from '../../../components/admin/Navigation';
+import Loader from '../../../components/admin/Loader';
 
 // ========== Styled Components ========== //
 const Main = styled.main`
@@ -125,15 +126,16 @@ const RegularLabel = styled.label`
 	transition: 200ms ease-in-out;
 `;
 
-const FileInput = styled.input`
+const Select = styled.select`
 	width: 100%;
 	padding: 12px;
-	border-width: 1px;
+	margin-bottom: 6px;
 	border-radius: 6px;
-	cursor: pointer;
-	transition: 200ms ease-in-out;
+	border-width: 1px;
+	outline: none;
+	transition: 300ms ease-in-out;
 	&:hover {
-		box-shadow: var(--shadow-medium);
+		border-color: var(--dark-green-color);
 	}
 `;
 
@@ -159,46 +161,92 @@ const SubmitButton = styled.button`
 `;
 
 // ========== React Function Component ========== //
-const CreateCategory = () => {
-	// Define the initial value
-	const [categoryInput, setCategory] = useState({
-		name: ''
+const EditSubCategory = () => {
+	const [categories, setCategories] = useState([]);
+	const [subCategoryInput, setSubCategory] = useState({
+		name: '',
+		category_id: ''
 	});
-	const [image, setImage] = useState('');
 	const [errors, setErrors] = useState([]);
+	const [loading, setLoading] = useState(true);
 
-	// When the inputs change
+	const {id} = useParams();
+	const navigate = useNavigate();
+
 	const handleInput = (event) => {
 		event.persist();
-		setCategory({...categoryInput, [event.target.name]: event.target.value});
-	}
-	// When the image change
-	const handleImage = (event) => {
-		setImage({image: event.target.files[0]});
+		setSubCategory({...subCategoryInput, [event.target.name]: event.target.value});
 	}
 
-	// Store the category
-	const store = async(event) => {
+	const edit = async() => {
+		const response = await axios.get(`http://127.0.0.1:8000/api/admin/sub-category/${id}/edit`);
+		if(response.status === 200) {
+			setCategories(response.data.categories);
+			setSubCategory(response.data.subCategory);
+			setLoading(false);
+		}
+	}
+
+	// Update the category
+	const update = async(event) => {
 		event.preventDefault();
-		// Append name and image (Line 17-19) to data
-		const formData = new FormData();
-		formData.append('name', categoryInput.name);
-		formData.append('image', image.image);
 
-		const response = await axios.post(`http://127.0.0.1:8000/api/admin/category`, formData);
+		// Append name and image (Line 17-19) to data
+		const data = new FormData();
+		data.append('name', subCategoryInput.name);
+		data.append('category_id', subCategoryInput.category_id);
+
+		document.getElementById('updateButton').disabled = true;
+		document.getElementById('updateButton').innerText = 'Updating...';
+
+		const response = await axios.post(`http://127.0.0.1:8000/api/admin/sub-category/${id}`, data);
 		if(response.data.status === 200) {
 			// Sweet Alert
 			swal('Success', response.data.message);
-			// Clear the input
-			setCategory({...categoryInput,
-				name: ''
-			});
-			// Clear errors
-			setErrors([]);
+			document.getElementById('updateButton').disabled = false;
+			document.getElementById('updateButton').innerText = 'Update';
+			// Return to category page
+			navigate('/admin/sub-category');
 		} else {
+			document.getElementById('updateButton').disabled = false;
+			document.getElementById('updateButton').innerText = 'Update';
 			// Show the errors
 			setErrors(response.data.errors);
 		}
+	}
+
+	useEffect(() => {
+		edit();
+	}, []);
+
+	let editForm = '';
+	if(loading) {
+		// While getting data from server, display Loading...
+		editForm = <Loader/>
+	} else {
+		// When finish loading, loop through categories as item
+		editForm =
+			<Form encType="multipart/form-data" onSubmit={update}>
+				<InputContainer regular>
+					<RegularInput type="text" className="regular-input" name="name" value={subCategoryInput.name} onChange={handleInput} placeholder=" "/>
+					<RegularLabel className="regular-label">Name</RegularLabel>
+					<InputError>{errors.name}</InputError>
+				</InputContainer>
+
+				<InputContainer>
+					<Select name="category_id" value={subCategoryInput.category_id} onChange={handleInput}>
+						<option value="">Select a category...</option>
+						{categories.map((item) => {
+							return (
+								<option value={item.id} key={item.id}>{item.name}</option>
+							)
+						})}
+					</Select>
+					<InputError>{errors.category_id}</InputError>
+				</InputContainer>
+				
+				<SubmitButton type="submit">Store</SubmitButton>
+			</Form>
 	}
 
 	return (
@@ -209,32 +257,18 @@ const CreateCategory = () => {
 				<Header/>
 
 				<Content>
-					<ContentTitle>Categories</ContentTitle>
-					
+					<ContentTitle>Sub-categories</ContentTitle>
+
 					<ContentBody>
 						<ContentHeader>
-							<ContentHeaderTitle>Create</ContentHeaderTitle>
+							<ContentHeaderTitle>Edit</ContentHeaderTitle>
 
-							<LinkClose to="/admin/category">
+							<LinkClose to="/admin/sub-category">
 								<i className="fa-solid fa-xmark"></i>
 							</LinkClose>
 						</ContentHeader>
 
-						<Form encType="multipart/form-data" onSubmit={store}>
-							<InputContainer regular>
-								{/* When the input changed, set the name as current typed value (event.target.value) */}
-								<RegularInput type="text" className="regular-input" name="name" value={categoryInput.name} onChange={handleInput} placeholder=" "/>
-								<RegularLabel className="regular-label">Name</RegularLabel>
-								<InputError>{errors.name}</InputError>
-							</InputContainer>
-
-							<InputContainer>
-								<FileInput type="file" name="image" onChange={handleImage}/>
-								<InputError>{errors.image}</InputError>
-							</InputContainer>
-
-							<SubmitButton type="submit">Store</SubmitButton>
-						</Form>
+						{editForm}
 					</ContentBody>
 				</Content>
 			</Section>
@@ -242,4 +276,4 @@ const CreateCategory = () => {
 	);
 }
 
-export default CreateCategory;
+export default EditSubCategory;

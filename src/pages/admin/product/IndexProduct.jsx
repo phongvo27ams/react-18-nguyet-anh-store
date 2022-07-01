@@ -90,7 +90,7 @@ const TableData = styled.td`
 `;
 
 const TableDataImage = styled.img`
-	width: 200px;
+	width: 80px;
 `;
 
 const LinkEdit = styled(Link)`
@@ -116,25 +116,23 @@ const TableDataLoader = styled.td`
 `;
 
 // ========== React Function Component ========== //
-const IndexCategory = () => {
-	// Set the state
-	const [categories, setCategories] = useState([]);
+const IndexProduct = () => {
+	const [products, setProducts] = useState([]);
 	const [loading, setLoading] = useState(true);
 
 	const index = async() => {
-		const response = await axios.get(`http://127.0.0.1:8000/api/admin/category`);
+		const response = await axios.get(`http://127.0.0.1:8000/api/admin/product`);
 		if(response.data.status === 200) {
-			setCategories(response.data.categories);
+			setProducts(response.data.products);
 			setLoading(false);
 		}
 	}
 
 	const destroy = async(event, id) => {
-		// Deleting process message
 		const deleting = event.currentTarget;
-		deleting.innerText = 'Deleting...';
+		deleting.innerText = 'Deleting';
 
-		const response = await axios.delete(`http://127.0.0.1:8000/api/admin/sub-category/${id}`);
+		const response = await axios.delete(`http://127.0.0.1:8000/api/admin/product/${id}`);
 		if(response.data.status === 200) {
 			// Sweet Alert
 			swal('Success', response.data.message);
@@ -142,33 +140,39 @@ const IndexCategory = () => {
 		}
 	}
 
-	// Show the list of categories
 	useEffect(() => {
 		index();
 	}, []);
 
-	let categoriesTable = '';
+	let productsTable = '';
 	if(loading) {
-		// While getting data from server, display the Loader
-		categoriesTable = 
+		productsTable =
 			<TableRow>
-				<TableDataLoader colSpan="3"><Loader/></TableDataLoader>
+				<TableDataLoader colSpan="12"><Loader/></TableDataLoader>
 			</TableRow>
 	} else {
-		// When finish loading, loop through categories as item
-		categoriesTable = categories.map((item) => {
+		productsTable = products.map((item) => {
 			return (
 				<TableRow key={item.id}>
 					<TableData>{item.name}</TableData>
+					<TableData>{item.sub_category.name}</TableData>
+					<TableData>{item.unit_price}</TableData>
+					<TableData>{item.sale_price}</TableData>
+					<TableData>{item.rate}</TableData>
+					<TableData>{item.vendor}</TableData>
+					<TableData>{item.sku}</TableData>
+					<TableData>{item.availability}</TableData>
+					<TableData>{item.color}</TableData>
+					<TableData>{item.size}</TableData>
 					<TableData>
-						<TableDataImage src={`http://127.0.0.1:8000/assets/images/category/${item.image}`} atl="category"/>
+						<TableDataImage src={`http://127.0.0.1:8000/assets/images/product/${item.image}`}/>
 					</TableData>
+
 					<TableData>
-						<LinkEdit to={`/admin/category/${item.id}/edit`}>
+						<LinkEdit to={`/admin/product/${item.id}/edit`}>
 							<i className="fa-solid fa-pen-to-square"></i>
 						</LinkEdit>
-						
-						{/* Call the destroy function with event and id */}
+
 						<LinkDestroy onClick={(event) => destroy(event, item.id)}>
 							<i className="fa-solid fa-trash-can"></i>
 						</LinkDestroy>
@@ -176,6 +180,7 @@ const IndexCategory = () => {
 				</TableRow>
 			);
 		});
+			
 	}
 
 	return (
@@ -187,9 +192,9 @@ const IndexCategory = () => {
 
 				<Content>
 					<ContentTitle>
-						Categories
+						Products
 
-						<LinkCreate to="/admin/category/create">
+						<LinkCreate to="/admin/product/create">
 							<i className="fa-solid fa-circle-plus"></i>
 						</LinkCreate>
 					</ContentTitle>
@@ -199,13 +204,23 @@ const IndexCategory = () => {
 							<thead>
 								<tr>
 									<TableHeader>Name</TableHeader>
+									<TableHeader>Sub-category</TableHeader>
+									<TableHeader>Unit Price</TableHeader>
+									<TableHeader>Sale Price</TableHeader>
+									<TableHeader>Rate</TableHeader>
+									<TableHeader>Vendor</TableHeader>
+									<TableHeader>SKU</TableHeader>
+									<TableHeader>Availability</TableHeader>
+									<TableHeader>Color</TableHeader>
+									<TableHeader>Size</TableHeader>
 									<TableHeader>Image</TableHeader>
+									
 									<TableHeader rowSpan="2">Options</TableHeader>
 								</tr>
 							</thead>
 
 							<tbody>
-								{categoriesTable}
+								{productsTable}
 							</tbody>
 						</Table>
 					</TableContainer>
@@ -215,4 +230,4 @@ const IndexCategory = () => {
 	);
 }
 
-export default IndexCategory;
+export default IndexProduct;
