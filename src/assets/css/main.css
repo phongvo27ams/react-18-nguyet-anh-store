@@ -1,10 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&family=Lobster&display=swap');
+
 * {
-	font-family: 'Lobster', cursive;
-	font-family: 'Quicksand', sans-serif;
+	font-family: 'Hind', sans-serif;
 }
 
 body {
 	font-size: 0.875rem;
+	color: var(--grey-800);
 }
 
 .carousel-wrapper {

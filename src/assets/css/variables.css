@@ -1,11 +1,14 @@
-/* ==================== Variable CSS ==================== */
+/* ==================== VARIABLES CSS ==================== */
 :root {
-	/* -------------------- Admin -------------------- */
-	--dark-green-color: #15a362;
-	--grey-text-color: #5d6778;
-	--light-red-color: rgb(239, 68, 68);
-	--dark-red-color: rgb(220, 38, 38);
-	--light-green-background-color: #edfdf6;
-	--light-grey-background-color: #f5f6fe;
+	--blue-100: #e9f2ff;
+	--blue-400: #2879fe;
+	--grey-100: #f7f8fa;
+	--grey-200: #e9e7e7;
+	--grey-500: #999999;
+	--grey-800: #191919;
+	--orange-400: #fdbc20;
+	--orange-500: #ffb503;
+	--purple-300: #7c3aed;
+	--red-400: #f8353e;
 	--shadow-medium: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
 }

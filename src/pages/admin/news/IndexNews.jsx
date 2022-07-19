@@ -34,7 +34,7 @@ const Content = styled.section`
 	position: relative;
 	min-height: 100vh;
 	padding: 36px;
-	background-color: var(--light-grey-background-color);
+	background-color: var(--grey-100);
 `;
 
 const ContentTitle = styled.div`
@@ -45,11 +45,11 @@ const ContentTitle = styled.div`
 
 const LinkCreate = styled(Link)`
 	font-size: 20px;
-	color: var(--grey-text-color);
+	color: var(--grey-500);
 	margin-left: 8px;
 	transition: 500ms ease-in-out;
 	&:hover {
-		color: var(--dark-green-color);
+		color: var(--blue-400);
 	}
 `;
 

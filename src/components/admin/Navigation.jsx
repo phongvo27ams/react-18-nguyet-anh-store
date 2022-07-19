@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {NavLink} from 'react-router-dom';
 import styled from 'styled-components';
 
-// ========== Styled Components ========== //
+// ========== STYLED COMPONENTS ========== //
 const NavigationContainer = styled.nav`
 	display: flex;
 	position: fixed;
@@ -13,7 +13,7 @@ const NavigationContainer = styled.nav`
 	border-right-width: 1px;
 	min-height: 100vh;
 	transition: 500ms ease-in-out;
-	&.show-menu {
+	&.active {
 		left: 0;
 	}
 	@media screen and (min-width: 1024px) {
@@ -21,50 +21,52 @@ const NavigationContainer = styled.nav`
 	}
 `;
 
-const Dashboard = styled.div`
-	font-size: 1.25rem;
-	padding: 1rem 1rem 1rem 1.375rem;
-	margin-bottom: 1rem;
+const NavigationDashboard = styled.div`
+	font-size: 20px;
+	padding: 16px 16px 16px 22px;
+	margin-bottom: 16px;
 `;
 
-const DashboardIcon = styled.i`
+const NavigationDashboardIcon = styled.i`
 	color: white;
-	background-color: var(--dark-green-color);
-	padding: 0.625rem;
-	margin-right: 0.625rem;
+	background-color: var(--blue-400);
+	padding: 10px;
+	margin-right: 10px;
 	border-radius: 50%;
 `;
 
-const DashboardHeading = styled.span`
+const NavigationDashboardHeading = styled.span`
+	color: var(--blue-400);
 	text-transform: uppercase;
 	font-weight: 600;
-	letter-spacing: 0.1rem;
+	letter-spacing: 1.6px;
+	cursor: default;
 `;
 
-const NavigationLink = styled(NavLink)`
+const NavigationNavLink = styled(NavLink)`
 	display: flex;
 	align-items: center;
 	cursor: pointer;
 	width: 100%;
-	padding: 1rem;
-	color: var(--grey-text-color);
-	padding-left: 1.375rem;
+	padding: 16px;
+	color: var(--grey-500);
+	padding-left: 22px;
 	transition: 500ms ease-in-out;
 	&:hover {
-		color: var(--dark-green-color);
+		color: var(--blue-400);
 	}
 	&.active {
-		color: var(--dark-green-color);
-		background-color: var(--light-green-background-color);
+		color: var(--blue-400);
+		background-color: var(--blue-100);
 		font-weight: 600;
-		border-left-width: 0.375rem;
-		border-color: var(--dark-green-color);
+		border-left-width: 6px;
+		border-color: var(--blue-400);
 	}
 `;
 
 const NavigationIcon = styled.i`
-	margin-right: 0.625rem;
-	font-size: 0.875rem;
+	margin-right: 10px;
+	font-size: 14px;
 `;
 
 const NavigationClose = styled.button`
@@ -75,14 +77,14 @@ const NavigationClose = styled.button`
 	right: -40px;
 	transition: 500ms ease-in-out;
 	&:hover {
-		color: var(--dark-green-color);
+		color: var(--blue-400);
 	}
 	@media screen and (min-width: 1024px) {
 		display: none;
 	}
 `;
 
-const Background = styled.div`
+const NavigationBackground = styled.div`
 	visibility: hidden;
 	opacity: 0;
 	position: fixed;
@@ -91,7 +93,7 @@ const Background = styled.div`
 	z-index: 2;
 	background-color: rgba(0, 0, 0, 0.7);
 	transition: 500ms ease-in-out;
-	&.show-menu {
+	&.active {
 		visibility: visible;
 		opacity: 1;
 	}
@@ -100,6 +102,7 @@ const Background = styled.div`
 	}
 `;
 
+// ========== REACT FUNCTION COMPONENT ========== //
 const Navigation = () => {
 	// ========== Navigation Toggle on Mobile Devices ========== //
 	// Use the Effect Hook to get the element after the DOM is rendered to avoid returning null
@@ -115,14 +118,14 @@ const Navigation = () => {
 
 		if(navigationToggle) {
 			navigationToggle.addEventListener('click', () => {
-				navigation.classList.add('show-menu');
-				navigationBackground.classList.add('show-menu');
+				navigation.classList.add('active');
+				navigationBackground.classList.add('active');
 			});
 		}
 		if(navigationClose) {
 			navigationClose.addEventListener('click', () => {
-				navigation.classList.remove('show-menu');
-				navigationBackground.classList.remove('show-menu');
+				navigation.classList.remove('active');
+				navigationBackground.classList.remove('active');
 			});
 		}
 	}
@@ -130,31 +133,31 @@ const Navigation = () => {
 	return (
 		<>
 			<NavigationContainer id="navigation">
-				<Dashboard>
-					<DashboardIcon className="fa-solid fa-building-columns"></DashboardIcon>
-					<DashboardHeading>Dashboard</DashboardHeading>
-				</Dashboard>
+				<NavigationDashboard>
+					<NavigationDashboardIcon className="fa-solid fa-building-columns"></NavigationDashboardIcon>
+					<NavigationDashboardHeading>Dashboard</NavigationDashboardHeading>
+				</NavigationDashboard>
 
 				<ul>
 					<li>
-						<NavigationLink to="/admin/category" className={({isActive}) => isActive ? "active" : ""}>
+						<NavigationNavLink to="/admin/category" className={({isActive}) => isActive ? "active" : ""}>
 							<NavigationIcon className="fa-solid fa-folder"></NavigationIcon> Categories
-						</NavigationLink>
+						</NavigationNavLink>
 					</li>
 					<li>
-						<NavigationLink to="/admin/sub-category" className={({isActive}) => isActive ? "active" : ""}>
+						<NavigationNavLink to="/admin/sub-category" className={({isActive}) => isActive ? "active" : ""}>
 							<NavigationIcon className="fa-solid fa-folder-open"></NavigationIcon> Sub-categories
-						</NavigationLink>
+						</NavigationNavLink>
 					</li>
 					<li>
-						<NavigationLink to="/admin/product" className={({isActive}) => isActive ? "active" : ""}>
+						<NavigationNavLink to="/admin/product" className={({isActive}) => isActive ? "active" : ""}>
 							<NavigationIcon className="fa-solid fa-shirt"></NavigationIcon> Products
-						</NavigationLink>
+						</NavigationNavLink>
 					</li>
 					<li>
-						<NavigationLink to="/admin/news" className={({isActive}) => isActive ? "active" : ""}>
+						<NavigationNavLink to="/admin/news" className={({isActive}) => isActive ? "active" : ""}>
 							<NavigationIcon className="fa-solid fa-file-lines"></NavigationIcon> News
-						</NavigationLink>
+						</NavigationNavLink>
 					</li>
 				</ul>
 
@@ -163,7 +166,7 @@ const Navigation = () => {
 				</NavigationClose>
 			</NavigationContainer>
 			
-			<Background id="navigationBackground"></Background>
+			<NavigationBackground id="navigationBackground"></NavigationBackground>
 		</>
 	);
 }

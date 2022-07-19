@@ -34,7 +34,7 @@ const Content = styled.section`
 	position: relative;
 	min-height: 100vh;
 	padding: 36px;
-	background-color: var(--light-grey-background-color);
+	background-color: var(--grey-100);
 `;
 
 const ContentTitle = styled.div`
@@ -45,11 +45,11 @@ const ContentTitle = styled.div`
 
 const LinkCreate = styled(Link)`
 	font-size: 20px;
-	color: var(--grey-text-color);
+	color: var(--grey-500);
 	margin-left: 8px;
 	transition: 500ms ease-in-out;
 	&:hover {
-		color: var(--dark-green-color);
+		color: var(--blue-400);
 	}
 `;
 
@@ -95,20 +95,12 @@ const TableDataImage = styled.img`
 
 const LinkEdit = styled(Link)`
 	padding: 0 10px;
-	color: rgb(59 130 246);
-	transition: 500ms linear;
-	&:hover {
-		color: rgb(29 78 216);
-	}
+	color: var(--blue-400);
 `;
 
 const LinkDestroy = styled.button`
 	padding: 0 10px;
-	color: rgb(239 68 68);
-	transition: 500ms linear;
-	&:hover {
-		color: rgb(185 28 28);
-	}
+	color: var(--red-400);
 `;
 
 const TableDataLoader = styled.td`

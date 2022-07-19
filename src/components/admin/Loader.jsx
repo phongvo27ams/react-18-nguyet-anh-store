@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-// ========== Styled Components ========== //
+// ========== STYLED COMPONENTS ========== //
 const LoaderContainer = styled.section`
 	position: relative;
 	display: flex;
@@ -11,14 +11,14 @@ const LoaderContainer = styled.section`
 	transform: scale(0.5);
 `;
 
-const Container = styled.div`
+const LoaderParentItem = styled.div`
 	position: absolute;
 	display: block;
 	width: 50px;
 	height: 50px;
 `;
 
-const Item = styled.div`
+const LoaderItem = styled.div`
 	position: absolute;
 	width: 50px;
 	height: 50px;
@@ -62,38 +62,39 @@ const Item = styled.div`
 	}
 `;
 
-const Dot = styled.div`
+const LoaderDot = styled.div`
 	position: relative;
 	top: 30px;
 	width: 7px;
 	height: 7px;
-	background-color: #0079d7;
+	background-color: var(--blue-400);
 	border-radius: 50%;
 `;
 
+// ========== REACT FUNCTION COMPONENT ========== //
 const Loader = () => {
 	return (
 		<LoaderContainer>
-			<Container>
-				<Item>
-					<Dot></Dot>
-				</Item>
-				<Item>
-					<Dot></Dot>
-				</Item>
-				<Item>
-					<Dot></Dot>
-				</Item>
-				<Item>
-					<Dot></Dot>
-				</Item>
-				<Item>
-					<Dot></Dot>
-				</Item>
-				<Item>
-					<Dot></Dot>
-				</Item>
-			</Container>
+			<LoaderParentItem>
+				<LoaderItem>
+					<LoaderDot></LoaderDot>
+				</LoaderItem>
+				<LoaderItem>
+					<LoaderDot></LoaderDot>
+				</LoaderItem>
+				<LoaderItem>
+					<LoaderDot></LoaderDot>
+				</LoaderItem>
+				<LoaderItem>
+					<LoaderDot></LoaderDot>
+				</LoaderItem>
+				<LoaderItem>
+					<LoaderDot></LoaderDot>
+				</LoaderItem>
+				<LoaderItem>
+					<LoaderDot></LoaderDot>
+				</LoaderItem>
+			</LoaderParentItem>
 		</LoaderContainer>
 	);
 }

@@ -1,8 +1,6 @@
 import React from 'react';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
-import '../src/assets/css/variables.css';
-
 import Index from './pages/guest/Index';
 
 import IndexCategory from './pages/admin/category/IndexCategory';

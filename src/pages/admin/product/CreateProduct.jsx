@@ -33,7 +33,7 @@ const Content = styled.section`
 	position: relative;
 	min-height: 100vh;
 	padding: 36px;
-	background-color: var(--light-grey-background-color);
+	background-color: var(--grey-100);
 `;
 
 const ContentTitle = styled.div`
@@ -68,7 +68,7 @@ const LinkClose = styled(Link)`
 	border-radius: 6px;
 	transition: 400ms ease-in-out;
 	&:hover {
-		color: var(--light-red-color);
+		color: var(--red-400);
 	}
 `;
 
@@ -101,11 +101,11 @@ const RegularInput = styled.input`
 	outline: none;
 	transition: 300ms ease-in-out;
 	&:focus {
-		border: 2px solid var(--dark-green-color);
+		border: 2px solid var(--blue-400);
 	}
 	&:focus ~ .regular-label {
 		z-index: 1;
-		color: var(--dark-green-color);
+		color: var(--blue-400);
 		top: -8px;
 		padding: 0 2px;
 		font-size: 12px;
@@ -114,7 +114,7 @@ const RegularInput = styled.input`
 	}
 	&:not(:placeholder-shown).regular-input:not(:focus) ~ .regular-label {
 		z-index: 1;
-		color: var(--dark-green-color);
+		color: var(--blue-400);
 		top: -8px;
 		padding: 0 2px;
 		font-size: 12px;
@@ -134,11 +134,11 @@ const Textarea = styled.textarea`
 	outline: none;
 	transition: 300ms ease-in-out;
 	&:focus {
-		border: 2px solid var(--dark-green-color);
+		border: 2px solid var(--blue-400);
 	}
 	&:focus ~ .regular-label {
 		z-index: 1;
-		color: var(--dark-green-color);
+		color: var(--blue-400);
 		top: -8px;
 		padding: 0 2px;
 		font-size: 12px;
@@ -147,7 +147,7 @@ const Textarea = styled.textarea`
 	}
 	&:not(:placeholder-shown).regular-input:not(:focus) ~ .regular-label {
 		z-index: 1;
-		color: var(--dark-green-color);
+		color: var(--blue-400);
 		top: -8px;
 		padding: 0 2px;
 		font-size: 12px;
@@ -160,7 +160,7 @@ const RegularLabel = styled.label`
 	position: absolute;
 	top: 14px;
 	left: 12px;
-	color: var(--grey-text-color);
+	color: var(--grey-500);
 	background-color: white;
 	transition: 300ms ease-in-out;
 `;
@@ -174,7 +174,7 @@ const Select = styled.select`
 	outline: none;
 	transition: 300ms ease-in-out;
 	&:hover {
-		border-color: var(--dark-green-color);
+		border-color: var(--blue-400);
 	}
 `;
 
@@ -191,7 +191,7 @@ const FileInput = styled.input`
 `;
 
 const InputError = styled.p`
-	color: var(--dark-red-color);
+	color: var(--red-400);
 	font-size: 12px;
 	margin: 6px 0;
 `;
@@ -201,13 +201,13 @@ const SubmitButton = styled.button`
 	font-weight: 600;
 	padding: 12px 24px;
 	border-width: 1px;
-	border-color: var(--dark-green-color);
+	border-color: var(--blue-400);
 	border-radius: 5px;
 	cursor: pointer;
 	transition: 500ms ease-in-out;
 	&:hover {
 		color: white;
-		background-color: var(--dark-green-color);
+		background-color: var(--blue-400);
 	}
 `;
 

@@ -1,69 +1,150 @@
-import React from 'react';
-import {Link} from 'react-router-dom';
+import React, {useEffect} from 'react';
+import styled from 'styled-components';
 
+import PrimaryNavigation from './PrimaryNavigation';
+
+// ========== STYLED COMPONENTS ========== //
+const StickyNavigationContainer = styled.nav`
+	position: fixed;
+	z-index: 3;
+	top: -50px;
+	width: 100%;
+	background-color: white;
+	box-shadow: var(--shadow-medium);
+	transition: 800ms ease-in-out;
+	&.active {
+		top: 0;
+	}
+`;
+
+const StickyNavigationContent = styled.div`
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 50px;
+	padding: 0 10px;
+	margin: 0 auto;
+	@media screen and (min-width: 576px) {
+		max-width: 546px;
+	}
+	@media screen and (min-width: 790px) {
+		max-width: 770px;
+	}
+	@media screen and (min-width: 1024px) {
+		max-width: 990px;
+	}
+	@media screen and (min-width: 1230px) {
+		max-width: 1200px;
+	}
+`;
+
+const StickyNavigationGroup = styled.ul`
+	display: flex;
+	align-items: center;
+	& li:last-child a {
+		padding-right: 0;
+	}
+`;
+
+const NavigationToggleContainer = styled.nav`
+	position: relative;
+`;
+
+const NavigationToggle = styled.button`
+	display: none;
+	text-transform: uppercase;
+	text-align: left;
+	font-size: 14px;
+	font-weight: 500;
+	padding: 10px 20px;
+	margin-right: 20px;
+	border-radius: 6px;
+	color: white;
+	background-color: var(--blue-400);
+	width: 200px;
+	transition: 800ms ease-in-out;
+	@media screen and (min-width: 1024px) {
+		display: block;
+	}
+	&.active {
+		border-radius: 6px 6px 0px 0px;
+	}
+`;
+
+const PrimaryNavigationContainer = styled.div`
+	display: block;
+	position: absolute;
+	z-index: 4;
+	width: 200px;
+	height: 0;
+	overflow: hidden;
+	transition: 800ms ease-in-out;
+	&.active {
+		height: 500px;
+	}
+`;
+
+const NavigationLink = styled.a`
+	padding: 12px 8px;
+	font-weight: 300;
+	&:hover {
+		color: var(--blue-400);
+	}
+`;
+
+// ========== REACT FUNCTION COMPONENT ========== //
 const StickyNavigation = () => {
+	useEffect(() => {
+		show_sticky_navigation();
+		show_navigation();
+	}, []);
+
+	// ---------- Show the sticky navigation when scrolling down ---------- //
+	const show_sticky_navigation = () => {
+		const stickyNavigation = document.getElementById('stickyNavigation');
+
+		window.addEventListener('scroll', function() {
+			if(this.scrollY >= 200) {
+				stickyNavigation.classList.add('active');
+			} else {
+				stickyNavigation.classList.remove('active');
+			}
+		});
+	}
+
+	// ---------- Show the navigation when clicking on button ---------- //
+	const show_navigation = () => {
+		const stickyNavigationButton = document.getElementById('stickyNavigationButton');
+		const primaryNavigationContainer = document.getElementById('primaryNavigationContainer');
+
+		primaryNavigationContainer.classList.toggle('active');
+		stickyNavigationButton.classList.toggle('active');
+	}
+
 	return (
-		<nav className="fixed top-[-3rem] z-[2] w-full bg-white shadow-md duration-[800ms]" id="sticky-navigation-bar">
-			<div className="flex justify-between items-center mx-auto px-[0.625rem] h-[3rem] max-w-[75rem]">
-				<ul className="flex items-center my-2">
-					<nav className="relative">
-						<button className="hidden lg:block pl-[1rem] pr-[6.25rem] py-[0.5rem] font-[700] uppercase text-white bg-blue-500 rounded-md duration-500 hover:bg-blue-600" id="sticky-navigation-button">Categories</button>
+		<StickyNavigationContainer id="stickyNavigation">
+			<StickyNavigationContent>
+				<StickyNavigationGroup>
+					<NavigationToggleContainer>
+						<NavigationToggle id="stickyNavigationButton" onClick={show_navigation}>Categories</NavigationToggle>
 
-						{/* Sticky Navigation: Content */}
-						<ul className="hidden absolute z-[2] top-[36px] bg-white rounded-b-md shadow-lg w-[200px]" id="sticky-navigation-content">
-							<li>
-								<a href="" className="block px-[1rem] py-[8px] hover:text-blue-500">
-									<div className="flex justify-between items-center">
-										<span><i className="fa-solid fa-mars text-[1.25rem] w-[1.563rem] h-[1.563rem] mr-[0.25rem]"></i> Men</span>
-									</div>
-								</a>
-								<div className="border-b mx-[1rem]"></div>
-							</li>
-							<li>
-								<a href="" className="block px-[1rem] py-[8px] hover:text-blue-500">
-									<div className="flex justify-between items-center">
-										<span><i className="fa-solid fa-venus text-[1.25rem] w-[1.563rem] h-[1.563rem] mr-[0.25rem]"></i> Women</span>
-									</div>
-								</a>
-								<div className="border-b mx-[1rem]"></div>
-							</li>
-							<li>
-								<a href="" className="block px-[1rem] py-[8px] hover:text-blue-500">
-									<div className="flex justify-between items-center">
-										<span><i className="fa-solid fa-glasses text-[1.25rem] w-[1.563rem] h-[1.563rem] mr-[0.25rem]"></i> Accessories</span>
-									</div>
-								</a>
-								<div className="border-b mx-[1rem]"></div>
-							</li>
-							<li>
-								<a href="" className="block px-[1rem] py-[8px] hover:text-blue-500">
-									<div className="flex justify-between items-center">
-										<span><i className="fa-solid fa-shoe-prints text-[1.25rem] w-[1.563rem] h-[1.563rem] mr-[0.25rem]"></i> Shoes</span>
-									</div>
-								</a>
-								<div className="border-b mx-[1rem]"></div>
-							</li>
-							<li>
-								<a href="" className="block px-[1rem] py-[8px] hover:text-blue-500">
-									<div className="flex justify-between items-center">
-										<span><i className="fa-solid fa-medal text-[1.25rem] w-[1.563rem] h-[1.563rem] mr-[0.25rem]"></i> New Arrivals</span>
-									</div>
-								</a>
-							</li>
-						</ul>
-					</nav>
+						<PrimaryNavigationContainer id="primaryNavigationContainer">
+							<PrimaryNavigation/>
+						</PrimaryNavigationContainer>
+					</NavigationToggleContainer>
 
-					<li><a href="" className="px-[0.5rem] py-[0.5rem] duration-500 hover:text-blue-500">Home</a></li>
-					<li><a href="" className="px-[0.5rem] py-[0.5rem] duration-500 hover:text-blue-500">News</a></li>
-					<li><a href="" className="px-[0.5rem] py-[0.5rem] duration-500 hover:text-blue-500">About Us</a></li>
-					<li><a href="" className="pl-[0.5rem] py-[0.5rem] duration-500 hover:text-blue-500">Contact Us</a></li>
-				</ul>
-				<ul className="flex my-2">
-					<li><a href="" className="px-[0.5rem] py-[0.5rem] duration-500 hover:text-blue-500">Log In</a></li>
-					<li><a href="" className="pl-[0.5rem] py-[0.5rem] duration-500 hover:text-blue-500">Register</a></li>
-				</ul>
-			</div>
-		</nav>
+					<li><NavigationLink href="">Home</NavigationLink></li>
+					<li><NavigationLink href="">News</NavigationLink></li>
+					<li><NavigationLink href="">About Us</NavigationLink></li>
+					<li><NavigationLink href="">Contact Us</NavigationLink></li>
+				</StickyNavigationGroup>
+
+				<StickyNavigationGroup>
+					<li><NavigationLink href="">Log In</NavigationLink></li>
+					<li><NavigationLink href="">Register</NavigationLink></li>
+				</StickyNavigationGroup>
+			</StickyNavigationContent>
+		</StickyNavigationContainer>
 	);
 }
 
