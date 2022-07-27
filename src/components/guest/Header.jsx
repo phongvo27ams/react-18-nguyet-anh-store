@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 
 import '../../assets/css/main.css';
-import '../../assets/js/guest/main';
 
 // ========== STYLED COMPONENTS ========== //
 const HeaderContainer = styled.header`
@@ -263,6 +262,11 @@ const SearchLink = styled.a`
 	&:hover {
 		color: var(--blue-400);
 	}
+
+	& svg {
+		width: 22px;
+		height: 22px;
+	}
 `;
 
 const Label = styled.label`
@@ -320,7 +324,9 @@ const Header = () => {
 					<InputContainer>
 						<Input type="text" className="input" placeholder=" "/>
 						<SearchLink href="" className="search-link">
-							<i className="fa-solid fa-magnifying-glass"></i>
+							<svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  								<path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+							</svg>
 						</SearchLink>
 						<Label className="label">Search Products</Label>
 					</InputContainer>

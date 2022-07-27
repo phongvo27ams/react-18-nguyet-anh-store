@@ -68,30 +68,44 @@ const PrimaryBanner = styled.div`
 
 const PrimaryBannerContent = styled.div`
 	position: absolute;
-	top: 125px;
-	left: 60px;
+	top: 34%;
+	left: 7%;
 	display: flex;
 	flex-wrap: wrap;
 	text-transform: uppercase;
-	max-width: 252px;
 	justify-content: space-between;
 `;
 
 const PrimaryBannerTitle = styled.p`
-	font-size: 16px;
+	font-size: 15px;
+	width: 100%;
+	font-weight: 400;
+	@media screen and (min-width: 576px) {
+		font-size: 26px;
+	}
+	@media screen and (min-width: 790px) {
+		font-size: 16px;
+	}
+	@media screen and (min-width: 1024px) {
+		font-size: 16px;
+	}
 `;
 
 const PrimaryBannerHeading = styled.p`
-	font-size: 36px;
+	font-size: 19px;
 	font-weight: 500;
 	letter-spacing: 0.6px;
 	margin-bottom: 8px;
+	width: 100%;
+	@media screen and (min-width: 576px) {
+		font-size: 36px;
+	}
 `;
 
 const PrimaryBannerLink = styled.a`
-	font-size: 14px;
+	font-size: 12px;
 	font-weight: 500;
-	padding: 12px 28px;
+	padding: 6px 28px;
 	color: var(--blue-400);
 	border: 1px solid var(--blue-400);
 	border-radius: 6px;
@@ -99,6 +113,10 @@ const PrimaryBannerLink = styled.a`
 	&:hover {
 		color: white;
 		background-color: var(--blue-400);
+	}
+	@media screen and (min-width: 790px) {
+		font-size: 14px;
+		padding: 12px 28px;
 	}
 `;
 
@@ -113,16 +131,21 @@ const SecondaryBanner = styled.a`
 	align-items: flex-end;
 	position: relative;
 	padding: 20px;
-	width: 254px;
-	height: 394px;
+	width: 80%;
+	height: 374px;
 	margin: 0 auto;
-	&:hover .secondary-banner--content {
-		color: white;
-		background-color: rgba(40, 121, 254, 0.8);
+	@media screen and (min-width: 576px) {
+		width: 48%;
+		height: 394px;
 	}
 	@media screen and (min-width: 790px) {
 		width: 100%;
 		height: 100%;
+	}
+
+	&:hover .secondary-banner--content {
+		color: white;
+		background-color: rgba(40, 121, 254, 0.8);
 	}
 `;
 
@@ -136,6 +159,10 @@ const SecondaryBannerContent = styled.div`
 	border-radius: 6px;
 	transition: 500ms ease-in-out;
 	@media screen and (min-width: 1024px) {
+		font-size: 15px;
+		padding: 14px;
+	}
+	@media screen and (min-width: 1230px) {
 		font-size: 16px;
 		padding: 26px;
 	}
@@ -186,18 +213,19 @@ const SecondaryNavigationLink = styled.a`
 	position: relative;
 	display: block;
 	width: 100%;
-	height: 80px;
+	height: 60px;
+	@media screen and (min-width: 576px) {
+		height: 70px;
+	}
+	@media screen and (min-width: 790px) {
+		height: 80px;
+	}
+
 	& img {
 		border-radius: 6px;
 		object-fit: cover;
 		width: 100%;
 		height: 100%
-	}
-	@media screen and (min-width: 1024px) {
-		width: 178px;
-	}
-	@media screen and (min-width: 1230px) {
-		width: 220px;
 	}
 `;
 
@@ -211,7 +239,7 @@ const SecondaryNavigationTitle = styled.div`
 	width: 100%;
 	height: 100%;
 	background-color: transparent;
-	font-size: 18px;
+	font-size: 16px;
 	font-weight: 500;
 	color: ${props => props.black ? 'black' : 'white'};
 	border-radius: 6px;
@@ -220,6 +248,10 @@ const SecondaryNavigationTitle = styled.div`
 		color: white;
 		background-color: var(--blue-400);
 	}
+	@media screen and (min-width: 1230px) {
+		font-size: 18px;
+	}
+
 `;
 
 // ---------- Product Slider ---------- //
@@ -249,14 +281,18 @@ const ProductSliderContainer = styled.section`
 
 const ProductSliderBanner = styled.div`
 	position: relative;
-	border-radius: 6px;
-	padding: 30px 15px;
+	border-radius: 6px 0 0 6px;
+	padding: 10px;
+	@media screen and (min-width: 576px) {
+		padding: 30px 15px;
+	}
+
 	& img {
 		position: absolute;
 		z-index: -1;
 		top: 0;
 		left: 0;
-		border-radius: 6px;
+		border-radius: 6px 0 0 6px;
 	}
 `;
 
@@ -266,9 +302,19 @@ const ProductSliderBannerHeading = styled.div`
 	text-transform: uppercase;
 	color: var(--grey-800);
 	padding: 0 15px;
+	@media screen and (min-width: 576px) {
+		font-size: 20px;
+	}
+
 	& h3 {
-		font-size: 28px;
+		font-size: 22px;
 		letter-spacing: 0.78px;
+		@media screen and (min-width: 576px) {
+			font-size: 24px;
+		}
+		@media screen and (min-width: 790px) {
+			font-size: 28px;
+		}
 	}
 `;
 
@@ -276,11 +322,12 @@ const ProductSliderBannerUnorderList = styled.ul`
 	display: block;
 	padding: 0;
 	margin-top: 8px;
+
 	& a {
 		display: block;
-		padding: 6px 15px;
+		padding: 6px;
 		color: var(--grey-500);
-		font-size: 14px;
+		font-size: 13px;
 		font-weight: 300;
 		border-radius: 6px;
 		&:hover,
@@ -288,40 +335,69 @@ const ProductSliderBannerUnorderList = styled.ul`
 			color: var(--blue-400);
 			background-color: rgba(255, 255, 255, 0.9);
 		}
+		@media screen and (min-width: 576px) {
+			font-size: 14px;
+			padding: 6px 15px;
+		}
 	}
 `;
 
 const ProductSwiperContainer = styled.div`
-	grid-column: span 2 / span 2;
+	@media screen and (min-width: 576px) {
+		grid-column: span 2 / span 2;
+	}
+	@media screen and (min-width: 1024px) {
+		grid-column: span 4 / span 4;
+	}
+
 	& .product-swiper .swiper-button-prev,
 	& .product-swiper .swiper-button-next  {
-		top: 150px;
+		top: 100px;
 		color: var(--grey-800);
 		background-color: white;
 		border-radius: 50%;
-		width: 38px;
-		height: 38px;
+		width: 26px;
+		height: 26px;
 		&:after {
-			font-size: 18px;
+			font-size: 12px;
 		}
 		&:hover {
 			color: white;
 			background-color: var(--blue-400);
 		}
-	}
-	@media screen and (min-width: 1024px) {
-		grid-column: span 4 / span 4;
+		@media screen and (min-width: 576px) {
+			width: 38px;
+			height: 38px;
+			&:after {
+				font-size: 18px;
+			}
+		}
+		@media screen and (min-width: 790px) {
+			top: 150px;
+		}
 	}
 `;
 
 const ProductContainer = styled.a`
 	position: relative;
 	display: block;
-	width: 220px;
-	height: 375px;
+	width: 100%;
+	height: 340px;
 	overflow-y: hidden;
-	&:hover .product-content {
-		bottom: 0px;
+	@media screen and (min-width: 576px) {
+		height: 360px;
+		&:hover .product-content {
+			bottom: 0px;
+		}
+	}
+	@media screen and (min-width: 790px) {
+		height: 404px;
+	}
+	@media screen and (min-width: 1024px) {
+		height: 304px;
+	}
+	@media screen and (min-width: 1230px) {
+		height: 375px;
 	}
 
 	& img {
@@ -347,26 +423,49 @@ const ProductLabel = styled.span`
 const ProductContent = styled.div`
 	display: block;
 	position: absolute;
-	bottom: -50px;
+	bottom: 0px;
 	width: 100%;
 	padding-top: 10px;
 	background-color: white;
 	transition: 500ms ease-in-out;
+	@media screen and (min-width: 1024px) {
+		bottom: -50px;
+	}
 
 	.product-vendor-container {
 		display: flex;
-		justify-content: space-between;
+		flex-direction: row;
+		flex-direction: column-reverse;
+		@media screen and (min-width: 790px) {
+			flex-direction: row;
+			justify-content: space-between;
+		}
+
 		.product-vendor {
 			text-transform: uppercase;
 			color: var(--grey-500);
 			margin-bottom: 6px;
+			font-size: 14px;
+			@media screen and (min-width: 576px) {
+				font-size: 12px;
+			}
+			@media screen and (min-width: 790px) {
+				font-size: 14px;
+			}
 		}
+
 		.product-rating svg {
 			display: inline-block;
 			fill: var(--orange-500);
-			width: 16px;
-			height: 16px;
-			margin-left: 4px;
+			width: 12px;
+			height: 12px;
+			&:not(:first-child) {
+				margin-left: 4px;
+			}
+			@media screen and (min-width: 790px) {
+				width: 14px;
+				height: 14px;
+			}
 		}
 	}
 
@@ -396,8 +495,8 @@ const AddToCartButton = styled.button`
 	background-color: white;
 	border-width: 1px;
 	border-color: var(--blue-400);
-	padding: 10px 16px;
-	margin-top: 20px;
+	padding: 8px;
+	margin-top: 8px;
 	border-radius: 6px;
 	text-transform: uppercase;
 	&:hover {
@@ -409,13 +508,117 @@ const AddToCartButton = styled.button`
 		background-color: var(--blue-400);
 		fill: white;
 	}
+	@media screen and (min-width: 576px) {
+		padding: 10px 16px;
+	}
+	@media screen and (min-width: 1024px) {
+		margin-top: 10px;
+	}
+	@media screen and (min-width: 1230px) {
+		margin-top: 20px;
+	}
 	
 	svg {
 		display: inline-block;
 		width: 20px;
 		height: 20px;
 		fill: var(--blue-400);
-		margin-right: 16px;
+		margin-right: 8px;
+		@media screen and (min-width: 576px) {
+			margin-right: 16px;
+		}
+	}
+`;
+
+// ---------- Sale & New Arrival Banner ---------- //
+const SaleBannerContainer = styled.section`
+	display: grid;
+	grid-template-columns: repeat(1, minmax(0, 1fr));
+	gap: 20px;
+	width: 100%;
+	padding: 0 10px;
+	margin: 0 auto;
+	margin-bottom: 60px;
+	@media screen and (min-width: 576px) {
+		max-width: 546px;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+	@media screen and (min-width: 790px) {
+		max-width: 770px;
+	}
+	@media screen and (min-width: 1024px) {
+		max-width: 990px;
+	}
+	@media screen and (min-width: 1230px) {
+		max-width: 1200px;
+	}
+`;
+
+const SaleBannerContainerContent = styled.div`
+	position: relative;
+	width: 100%;
+	height: 176px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	@media screen and (min-width: 576px) {
+		height: 157px;
+	}
+	@media screen and (min-width: 790px) {
+		height: 220px;
+	}
+	@media screen and (min-width: 1024px) {
+		height: 278px;
+	}
+	@media screen and (min-width: 1230px) {
+		height: 340px;
+	}
+
+	& .sale-banner__link {
+		z-index: 1;
+		color: var(--grey-800);
+		text-transform: uppercase;
+		text-align: center;
+		font-weight: 500;
+		background-color: rgba(255, 255, 255, 0.9);
+		border-radius: 6px;
+		padding: 15px;
+		transition: 500ms ease-in-out;
+		&:hover {
+			color: white;
+			background-color: rgba(40, 121, 254, 0.9);
+			padding: 30px 15px;
+		}
+		@media screen and (min-width: 790px) {
+			&:hover {
+				padding: 30px;
+			}
+		}
+	}
+
+	& .sale-banner__title-small {
+		font-size: 15px;
+		@media screen and (min-width: 1230px) {
+			font-size: 16px;
+		}
+	}
+
+	& .sale-banner__title-large {
+		font-size: 20px;
+		@media screen and (min-width: 576px) {
+			font-size: 23px;
+		}
+		@media screen and (min-width: 1230px) {
+			font-size: 26px;
+		}
+	}
+
+	& img {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		border-radius: 6px;
 	}
 `;
 
@@ -502,8 +705,11 @@ const Index = () => {
 						navigation = {true}
 						speed = {400}
 						spaceBetween = {20}
-						slidesPerView = {2}
+						slidesPerView = {1}
 						breakpoints = {{
+							576: {
+								slidesPerView: 2
+							},
 							1024: {
 								slidesPerView: 4
 							}
@@ -513,6 +719,7 @@ const Index = () => {
 						<SwiperSlide>
 							<ProductContainer href="">
 								<ProductLabel>Sale 13%</ProductLabel>
+
 								<ProductContent className="product-content">
 									<div className="product-vendor-container">
 										<div className="product-vendor">Zara</div>
@@ -550,6 +757,7 @@ const Index = () => {
 										<span>Add to cart</span>
 									</AddToCartButton>
 								</ProductContent>
+
 								<img src="http://127.0.0.1:8000/guest/images/index/TailoredFitMesh-PanelPolo_4_600x.jpg"/>
 							</ProductContainer>
 						</SwiperSlide>
@@ -777,52 +985,50 @@ const Index = () => {
 				</ProductSwiperContainer>
 			</ProductSliderContainer>
 
-			<section className="container mx-auto">
-				<div className="grid grid-cols-1 sm:grid-cols-2 gap-[1.25rem] mx-auto max-w-[75rem] px-[0.625rem] mb-[60px]">
-					<div className="max-w-[36.25rem] relative rounded-md">
-						<div className="absolute flex justify-center items-center w-full h-full">
-							<a href="" className="p-[0.625rem] sm:p-[0.875rem] md:p-[1rem] lg:p-[2rem] rounded bg-white-0.9 duration-500 hover:text-white hover:bg-blue-500-0.9 overflow-hidden hover:scale-[1.1]">
-								<p className="block w-[21.25rem] sm:w-[13.75rem] md:w-[16.25rem] uppercase text-center text-[1.25rem] sm:text-[0.875rem] lg:text-[1rem]">Fall-winter Clearance Sales</p>
-								<p className="block w-[21.25rem] sm:w-[13.75rem] md:w-[16.25rem] uppercase text-center font-bold text-[1.625rem] sm:text-[1.25rem] md:text-[1.5rem] lg:text-[1.625rem]">Get up to 50% off</p>
-							</a>
-						</div>
-						<img src="http://127.0.0.1:8000/guest/images/index/lay20_01_1024x.png" className="object-contain rounded-md"/>
-					</div>
-					<div className="max-w-[36.25rem] relative rounded-md">
-						<div className="absolute flex justify-center items-center w-full h-full">
-							<a href="" className="p-[0.875rem] md:p-[1rem] lg:p-[2rem] rounded bg-white-0.9 duration-500 hover:text-white hover:bg-blue-500-0.9 overflow-hidden hover:scale-[1.1]">
-								<p className="block w-[13.75rem] md:w-[16.25rem] uppercase text-center text-[0.875rem] lg:text-[1rem]">Summer 2022</p>
-								<p className="block w-[13.75rem] md:w-[16.25rem] uppercase text-center font-bold text-[1.375rem] md:text-[1.5rem] lg:text-[1.625rem]">New Arrivals</p>
-							</a>
-						</div>
-						<img src="http://127.0.0.1:8000/guest/images/index/lay20_02_1024x.png" className="object-contain rounded-md"/>
-					</div>
-				</div>
+			<SaleBannerContainer>
+				<SaleBannerContainerContent>
+					<a href="" className="sale-banner__link">
+						<p className="sale-banner__title-small">Fall-winter Clearance Sales</p>
+						<p className="sale-banner__title-large">Get up to 50% off</p>
+					</a>
 
-				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[1.25rem] max-w-[75rem] px-[0.625rem] mx-auto mb-[60px]">
-					<div className="flex">
-						<i className="fa-solid fa-truck-fast text-blue-500 text-[45px] duration-500 group-hover:text-blue-500"></i>
-						<div className="pl-[21px]">
-							<p className="uppercase font-bold text-[16px]">Free shipping</p>
-							<p className="text-[14px]">Free shipping on all Ho Chi Minh City or order above $99.00</p>
-						</div>
+					<img src="http://127.0.0.1:8000/guest/images/index/lay20_01_1024x.png"/>
+				</SaleBannerContainerContent>
+
+				<div className="max-w-[36.25rem] relative rounded-md">
+					<div className="absolute flex justify-center items-center w-full h-full">
+						<a href="" className="p-[0.875rem] md:p-[1rem] lg:p-[2rem] rounded bg-white-0.9 duration-500 hover:text-white hover:bg-blue-500-0.9 overflow-hidden hover:scale-[1.1]">
+							<p className="block w-[13.75rem] md:w-[16.25rem] uppercase text-center text-[0.875rem] lg:text-[1rem]">Summer 2022</p>
+							<p className="block w-[13.75rem] md:w-[16.25rem] uppercase text-center font-bold text-[1.375rem] md:text-[1.5rem] lg:text-[1.625rem]">New Arrivals</p>
+						</a>
 					</div>
-					<div className="flex">
-						<i className="fa-solid fa-headset text-blue-500 text-[45px] duration-500 group-hover:text-blue-500"></i>
-						<div className="pl-[21px]">
-							<p className="uppercase font-bold text-[16px]">Support 24/7</p>
-							<p className="text-[14px]">Contact us 24 hours a day, 7 days a week</p>
-						</div>
-					</div>
-					<div className="flex">
-						<i className="fa-solid fa-arrows-rotate text-blue-500 text-[45px] duration-500 group-hover:text-blue-500"></i>
-						<div className="pl-[21px]">
-							<p className="uppercase font-bold text-[16px]">30 days return</p>
-							<p className="text-[14px]">Simply return it within 24 days for an exchange</p>
-						</div>
+					<img src="http://127.0.0.1:8000/guest/images/index/lay20_02_1024x.png" className="object-contain rounded-md"/>
+				</div>
+			</SaleBannerContainer>
+
+			<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[1.25rem] max-w-[75rem] px-[0.625rem] mx-auto mb-[60px]">
+				<div className="flex">
+					<i className="fa-solid fa-truck-fast text-blue-500 text-[45px] duration-500 group-hover:text-blue-500"></i>
+					<div className="pl-[21px]">
+						<p className="uppercase font-bold text-[16px]">Free shipping</p>
+						<p className="text-[14px]">Free shipping on all Ho Chi Minh City or order above $99.00</p>
 					</div>
 				</div>
-			</section>
+				<div className="flex">
+					<i className="fa-solid fa-headset text-blue-500 text-[45px] duration-500 group-hover:text-blue-500"></i>
+					<div className="pl-[21px]">
+						<p className="uppercase font-bold text-[16px]">Support 24/7</p>
+						<p className="text-[14px]">Contact us 24 hours a day, 7 days a week</p>
+					</div>
+				</div>
+				<div className="flex">
+					<i className="fa-solid fa-arrows-rotate text-blue-500 text-[45px] duration-500 group-hover:text-blue-500"></i>
+					<div className="pl-[21px]">
+						<p className="uppercase font-bold text-[16px]">30 days return</p>
+						<p className="text-[14px]">Simply return it within 24 days for an exchange</p>
+					</div>
+				</div>
+			</div>
 
 			<Footer/>
 		</>
